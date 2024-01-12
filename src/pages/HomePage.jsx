@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './style.css';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   // Here we set two state variables for firstName and lastName using `useState`
@@ -8,10 +8,17 @@ function HomePage() {
 
   const handleInputChange = (e) => {
     // Getting the value and name of the input which triggered the change
-    const { name, value } = e.target;
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
 
     // Ternary statement that will call either setFirstName or setLastName based on what field the user is typing in
-    return name === 'username' ? setuserName(value) : setPassword(value);
+   
+     if (inputType === 'userName') {
+      setuserName(inputValue);
+    }else if (inputType === 'password'){
+      setPassword(inputValue)
+    }
   };
 
   const handleFormSubmit = (e) => {
@@ -38,7 +45,7 @@ function HomePage() {
           placeholder="userName"
         />
         <input
-          value={password}
+          value={Password}
           name="password"
           onChange={handleInputChange}
           type="text"
@@ -48,7 +55,12 @@ function HomePage() {
           Submit
         </button>
       </form>
-      <signup/>
+      <Link
+              to={`signup`}
+              className="badge bg-primary rounded-pill"
+            >
+              signup
+            </Link>
     </div>
   );
 }

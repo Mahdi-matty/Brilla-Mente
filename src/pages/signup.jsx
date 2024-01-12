@@ -1,6 +1,6 @@
 import React from 'react';
 import { checkPassword, validateEmail } from '../utils/helper';
-
+import { useState } from 'react';
 const signup = () => {
     const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
