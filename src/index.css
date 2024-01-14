@@ -62,7 +62,49 @@ nav {
   height: 25px;
   margin-bottom: 10px;
  }
+ .sideNav {
+  position: fixed;
+  left: -30%; 
+  top: 0;
+  height: 100%;
+  width: 30%;
+  background-color: #333;
+  padding: 20px;
+  transition: left 0.3s; 
+}
+.sideNav:hover {
+  left: 0; 
+}
+.sideNav ul {
+  list-style: none;
+  padding: 0;
+}
 
+.sideNav li {
+  margin-bottom: 10px;
+}
+
+.sideNav Link {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.sideNav Link:hover {
+  background-color: #555;
+  padding: 10px;
+  border-radius: 5px;
+}
+.iconSize {
+  font-size: 30px;
+  margin-top: 25px;
+}
+.navSpan {
+  display: none;
+}
+.sideNav li:hover .navSpan {
+  display: inline;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
