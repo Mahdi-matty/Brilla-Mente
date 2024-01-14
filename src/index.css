@@ -30,6 +30,38 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+.loginDivCont{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+nav {
+  position: fixed;
+  width: 100%;
+  top: 3px;
+  text-align: right;
+  background-color: #74a0ff;
+  opacity: 0.5;
+}
+.nav-link {
+  margin: 5px 15px;
+  color: black;
+  size: 25px;
+ }
+ .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin-top: 20px;
+ }
+ input {
+  width: 25vw;
+  height: 25px;
+  margin-bottom: 10px;
+ }
 
 h1 {
   font-size: 3.2em;
@@ -46,6 +78,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin-top: 5px;
 }
 button:hover {
   border-color: #646cff;

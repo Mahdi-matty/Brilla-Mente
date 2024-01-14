@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function HomePage() {
+  const navigate = useNavigate();
   // Here we set two state variables for firstName and lastName using `useState`
   const [userName, setuserName] = useState('');
   const [Password, setPassword] = useState('');
@@ -22,9 +23,8 @@ function HomePage() {
   };
 
   const handleFormSubmit = (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
-
+    navigate.push('/profile');
     // Alert the user their first and last name, clear the inputs
    
     setuserName('');
@@ -32,7 +32,7 @@ function HomePage() {
   };
 
   return (
-    <div className="container text-center">
+    <div className="container text-center loginDivCont">
       <h1>
       login!
       </h1>
@@ -52,7 +52,7 @@ function HomePage() {
           placeholder="password"
         />
         <button type="submit">
-          Submit
+          Login
         </button>
       </form>
       <Link
