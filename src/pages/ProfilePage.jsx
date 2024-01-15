@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaFileAlt, FaBook } from 'react-icons/fa';
+import Footer from '../components/footer'
  function ProfilePage() {
 
 
@@ -27,7 +28,7 @@ import { FaFileAlt, FaBook } from 'react-icons/fa';
                 </Link>
               </li>
             </ul>
-          </nav>   
+          </nav> 
         </div>
     )
 }

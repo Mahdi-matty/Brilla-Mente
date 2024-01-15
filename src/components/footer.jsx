@@ -1,4 +1,5 @@
 import React from 'react';
+import BrillaLogo from '../assets/brillam.png'
 
 const Footer = () => {
   return (
