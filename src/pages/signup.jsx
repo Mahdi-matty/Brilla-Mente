@@ -6,6 +6,7 @@ const signup = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword]=useState('');
   const [authCode, setAuthCode] = useState(null);
+  const [userstatus, setUsrStatus] = useState('studnet');
 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -69,6 +70,7 @@ const signup = () => {
     setUserName('');
     setPassword('');
     setEmail('');
+    setUsrStatus('student')
     alert(`Hello ${userName}`);
   };
   return (
@@ -96,6 +98,9 @@ const signup = () => {
           type="text"
           placeholder="password"
         />
+        <select value={userstatus} onChange={e=> setUsrStatus(e.target.value)}></select>
+        <option value='student'>Student</option>
+        <option value='teacher'>Teacher</option>
         <button type="submit">
           Submit
         </button>
