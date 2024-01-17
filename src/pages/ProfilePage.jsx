@@ -11,7 +11,7 @@ import Footer from '../components/footer'
             <ul>
               <li>
                  <Link
-                  to={`/myPosts`}
+                  to={`/subjects`}
                   className="badge bg-primary rounded-pill"
                   >
                      <FaFileAlt className="iconSize"/> {/* Icon for Posts */}

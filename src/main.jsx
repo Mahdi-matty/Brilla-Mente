@@ -6,9 +6,11 @@ import App from './App.jsx'
 import './index.css'
 import Signup from './pages/signup.jsx'
 import HomePage from './pages/HomePage.jsx';
-import PostPage from './pages/PostPages.jsx';
+import SubjectPage from './pages/subjectPage.jsx'
 import AssignmentPage from './pages/AssignmentPages.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
+import QuiztPage from './pages/quizPage.jsx';
+import SubjectForm from './components/UI/subjectForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,13 +30,22 @@ const router = createBrowserRouter([
         element: <ProfilePage />,
       },
       {
-        path: '/myPosts',
-        element: <PostPage />,
-      },              
+        path: '/subjects',
+        element: <SubjectPage />,
+      },
+             
       {
         path: '/assignments',
         element: <AssignmentPage />,
-      },   
+      },
+      {
+        path: '/quiz',
+        element: <QuiztPage />,
+      },
+      {
+        path: '/subjectform',
+        element: <SubjectForm />,
+      },         
     ],
   }
 ]);
