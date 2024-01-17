@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaFileAlt, FaBook } from 'react-icons/fa';
+import { FaFileAlt, FaBook, FaQuestionCircle } from 'react-icons/fa';
 import Footer from '../components/footer'
  function ProfilePage() {
 
@@ -25,6 +25,15 @@ import Footer from '../components/footer'
                   >
                      <FaBook className="iconSize"/> {/* Icon for Assignments */}
                      <span className='navSpan'>Assignments</span>
+                </Link>
+              </li>
+              <li>
+                 <Link
+                    to={`/quiz`}
+                    className="badge bg-primary rounded-pill"
+                  >
+                     <FaQuestionCircle className="iconSize"/> {/* Icon for Assignments */}
+                     <span className='navSpan'>Quiz</span>
                 </Link>
               </li>
             </ul>

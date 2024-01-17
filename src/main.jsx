@@ -11,6 +11,7 @@ import AssignmentPage from './pages/AssignmentPages.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import QuiztPage from './pages/quizPage.jsx';
 import SubjectForm from './components/UI/subjectForm.jsx';
+import SubjectPart from './components/UI/subjectPart.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/subjects',
         element: <SubjectPage />,
+      },
+      {
+        path: '/subjects/:id',
+        element: <SubjectPart />,
       },
              
       {

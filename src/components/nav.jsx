@@ -15,16 +15,16 @@ export default function Nav() {
           <Link key={3} className="nav-link text-light newNavHead" to="/profile">
                profile
           </Link>,
-          <Link key={4} className="nav-link text-light newNavHead" to="/subjects">
+          <Link key={4} className="nav-link text-light newNavHead" to="/subjects" style={{display: 'none'}}>
                 subjects
           </Link>,
-          <Link key={5} className="nav-link text-light newNavHead" to="/assignments">
+          <Link key={5} className="nav-link text-light newNavHead" to="/assignments" style={{display: 'none'}}>
                Assignments
           </Link>,
-          <Link key={6} className="nav-link text-light newNavHead" to="/quiz">
+          <Link key={6} className="nav-link text-light newNavHead" to="/quiz" style={{display: 'none'}}>
              Quiz
           </Link>,
-          <Link key={7} className="nav-link text-light newNavHead" to="/subjectform">
+          <Link key={7} className="nav-link text-light newNavHead" to="/subjectform" style={{display: 'none'}}>
           Subject form
        </Link>,
               ]}
