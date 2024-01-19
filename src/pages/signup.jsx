@@ -1,7 +1,6 @@
 import React from 'react';
-import { checkPassword, validateEmail } from '../utils/helper';
 import { useState } from 'react';
-const signup = () => {
+const signup = (props) => {
     const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword]=useState('');
@@ -31,48 +30,25 @@ const signup = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateEmail(email) || !userName) {
-      setErrorMessage('Email or username is invalid');
-      return;
-    }
-    if (!checkPassword(password)) {
-      setErrorMessage(
-        `Choose a more secure password for the account: ${userName}`
-      );
-      return;
-    }
-    const authCode = generateAuthCode();
-    setAuthCode(authCode);
     try {
-      const response = await fetch('http://localhost:3001/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          authCode,
-        }),
+      const authCode = generateAuthCode();
+      setAuthCode(authCode);
+      await props.subHandle({
+        userName,
+        email,
+        password,
+        userstatus,
       });
-
-      if (!response.ok) {
-        throw new Error('Error sending email. Please try again.');
-      }
-
-      console.log('Email sent with authentication code');
+      setUserName('');
+      setPassword('');
+      setEmail('');
+      setUsrStatus('student');
     } catch (error) {
-      console.error('Error sending email:', error);
-      setErrorMessage('Error sending email. Please try again.');
-      return;
-    }
+    console.error("Signup error:", error.message);
+    setErrorMessage("Error during signup. Please try again.");
+  }
+};
 
-    setUserName('');
-    setPassword('');
-    setEmail('');
-    setUsrStatus('student')
-    alert(`Hello ${userName}`);
-  };
   return (
     <footer>
       <div className='githubRes'>
@@ -98,9 +74,10 @@ const signup = () => {
           type="text"
           placeholder="password"
         />
-        <select value={userstatus} onChange={e=> setUsrStatus(e.target.value)}></select>
+        <select value={userstatus} onChange={e=> setUsrStatus(e.target.value)}>
         <option value='student'>Student</option>
         <option value='teacher'>Teacher</option>
+        </select>
         <button type="submit">
           Submit
         </button>

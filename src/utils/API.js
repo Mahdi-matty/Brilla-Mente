@@ -2,7 +2,7 @@ const URL_PREFIX="http://localhost:3001"
 
 const API = {
     login:userObj=>{
-        return fetch(`${URL_PREFIX}/api/users/login`,{
+        return fetch(`${URL_PREFIX}/api/students/login`,{
             method:"POST",
             body:JSON.stringify(userObj),
             headers:{

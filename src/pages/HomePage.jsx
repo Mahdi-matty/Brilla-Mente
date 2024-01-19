@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import API from '../utils/API'
 function HomePage() {
   const navigate = useNavigate();
-  // Here we set two state variables for firstName and lastName using `useState`
+  
   const [userName, setuserName] = useState('');
   const [Password, setPassword] = useState('');
+  const [token, setToken] = useState("");
 
   const handleInputChange = (e) => {
-    // Getting the value and name of the input which triggered the change
+  
     const { target } = e;
     const inputType = target.name;
     const inputValue = target.value;
 
-    // Ternary statement that will call either setFirstName or setLastName based on what field the user is typing in
    
      if (inputType === 'userName') {
       setuserName(inputValue);
@@ -21,15 +21,47 @@ function HomePage() {
       setPassword(inputValue)
     }
   };
+  useEffect(()=>{
+    const savedToken = localStorage.getItem("token");
+    if(savedToken){
+      API.getDataFromToken(savedToken).then(userData=>{
+        setToken(savedToken);
+        setIsLoggedIn(true)
+    }).catch(err=>{
+      localStorage.removeItem("token");
+    })
+  }
+},[])
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    navigate.push('/profile');
-    // Alert the user their first and last name, clear the inputs
-   
-    setuserName('');
-    setPassword('');
-  };
+  const handleFormSubmit =   userObj=>{
+    API.login({
+      username:userObj.userName,
+      password:userObj.password,
+  }).then(data=>{
+      console.log(data);
+      setIsLoggedIn(true);
+      setToken(data.token);
+      localStorage.setItem("token",data.token)
+      navigate.push('/profile')
+}).catch(err=>{
+    console.log(err);
+})
+}
+const handleSignup = userObj=>{
+  API.signup({
+    userName: userObj.userName,
+    email:userObj.email,
+    password:userObj.password,
+    userstatus: userObj.userstatus,
+}).then(data=>{
+    console.log(data);
+    setIsLoggedIn(true);
+    setToken(data.token);
+    localStorage.setItem("token",data.token)
+}).catch(err=>{
+    console.log(err);
+})
+}
 
   return (
     <div className="container text-center loginDivCont">
@@ -58,6 +90,7 @@ function HomePage() {
       <Link
               to={`signup`}
               className="badge bg-primary rounded-pill"
+              subHandle={handleSignup}
             >
               signup
             </Link>
