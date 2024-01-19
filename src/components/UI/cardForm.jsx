@@ -1,6 +1,5 @@
 import { useState } from "react"
-function SubjectForm(){
-    const [topic, setTopic] = useState('');
+function CardForm(){
     const [question, setQuestion] = useState('');
     const [answer, setAnswer] = useState('');
     const [difficulty, setDifficulty] = useState('');
@@ -10,9 +9,7 @@ function SubjectForm(){
         const inputType = target.name;
         const inputValue = target.value;
 
-         if (inputType === 'topic') {
-      setTopic(inputValue);
-    } else if (inputType === 'question') {
+        if (inputType === 'question') {
       setQuestion(inputValue);
     } else {
       setAnswer(inputValue);
@@ -28,17 +25,6 @@ function SubjectForm(){
     return (
         <div className="newSubjectAdd">
             <form className="newFormSubject" onSubmit={handleFormSubmit}>
-                <label htmlFor="topic">Topic:</label>
-                <input
-                name="topic"
-                id="topic"
-                value={topic}
-                onChange={handleInputChange}
-                placeholder="Enter topic"
-                type="text"
-                className="titleNewCard"
-                />
-
                 <label htmlFor="question">Question:</label>
                 <input
                 name="question"
@@ -72,4 +58,4 @@ function SubjectForm(){
     )
 }
 
-export default SubjectForm
+export default CardForm
