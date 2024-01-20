@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react"
 
 export default function SubjectPart (){
-    const [topics, setTopic] = useState('')
+    const [topics, setTopic] = useState([])
     const [newtopic, setNewTopic] = useState('');
     const { search } = useLocation();
     const urlParams = new URLSearchParams(search);
@@ -19,7 +19,11 @@ export default function SubjectPart (){
         })
       },[])
 
-    const addNewTopic = topicObj=>{
+      const handleFormSubmit = (e) => {
+        e.preventDefault();
+        const topicObj = {
+            title: newtopic
+        };
         API.createTopic(token,topicObj).then(newTopic=>{
           API.getTopics(token).then(allTopics=>{
             setTopic(allTopics)
@@ -32,7 +36,7 @@ export default function SubjectPart (){
       }
       const editeTopic = (id,obj)=>{
         API.editTopic(token,id,obj).then((data)=>{
-          API.getSubject(token).then(allTopics=>{
+          API.gettopics(token).then(allTopics=>{
             setTopic(allTopics)
           }).catch(err=>{
             console.log(err)
@@ -43,7 +47,7 @@ export default function SubjectPart (){
       }
       const delTopic = id=>{
         API.deleteTopic(token,id).then((data)=>{
-          API.getTopic(token).then(allTopic=>{
+          API.getTopics(token).then(allTopic=>{
             setTopic(allTopic)
           }).catch(err=>{
             console.log(err)
@@ -56,15 +60,15 @@ export default function SubjectPart (){
         <div>
             <h2>Topics</h2>
             <ul>
-            {topics.map(topic=>{
+            {topics.map((topic)=>(
                     <li key={topic.id}>
                     <Link to={`/topic/${topic.id}?token=${token}`}>{topic.title}</Link>
-                    <button onClick={editeTopic}>Edit</button>
-                    <button onClick={delTopic}>Delete</button>
+                    <button onClick={() => editeTopic(topic.id)}>Edit</button>
+                    <button onClick={() => delTopic(topic.id)}>Delete</button>
                     </li>
-                })}
+                ))}
             </ul>
-            <form onSubmit={addNewTopic}>
+            <form onSubmit={handleFormSubmit}>
                 <input
                 name='title'
                 placeholder='title'

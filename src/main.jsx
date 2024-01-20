@@ -10,7 +10,6 @@ import SubjectPage from './pages/subjectPage.jsx'
 import AssignmentPage from './pages/AssignmentPages.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import QuiztPage from './pages/quizPage.jsx';
-import CardForm from './components/UI/cardForm.jsx'
 import SubjectPart from './components/UI/subjectPart.jsx';
 import TopictPart from './components/UI/topicPart.jsx';
 
@@ -52,10 +51,6 @@ const router = createBrowserRouter([
         path: '/topic/:id',
         element: <TopictPart />,
       },        
-      {
-        path: '/cardform',
-        element: <CardForm />,
-      },         
     ],
   }
 ]);

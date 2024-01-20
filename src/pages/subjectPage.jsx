@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import API from '../utils/API'
 
 function SubjectPage(){
-    const [subjects, setSubjects] = useState('');
+    const [subjects, setSubjects] = useState([]);
     const [newsubject, setNewSubject] = useState('')
 
     const { state: { token } } = useLocation();
@@ -18,7 +18,11 @@ function SubjectPage(){
         })
       },[])
     // here i have to fetch subjects
-    const addNewSubject = subjectObj=>{
+    const handleFormSubmit = e=>{
+      e.preventDefault;
+      const subjectObj = {
+        subject: subjects
+      }
         API.createSubject(token,subjectObj).then(newsubject=>{
           API.getSubject(token).then(allSubjects=>{
             setSubjects(allSubjects)
@@ -57,15 +61,15 @@ function SubjectPage(){
         <div>
             <h2>Subjects</h2>
             <ul>
-                {subjects.map(subject=>{
-                    <li key={subject.id}>
+                {subjects.map((subject)=>(
+                <li key={subject.id}>
                     <Link to={`/subjects/${subject.id}?token=${token}`}>{subject.name}</Link>
-                    <button onClick={delSubject}>Delete</button>
-                    <button onClick={editeSubject}>Edit</button>
-                    </li>
-                })}
+                    <button onClick={() => delSubject(subject.id)}>Delete</button>
+                    <button onClick={() => editeSubject(subject.id)}>Edit</button>
+                </li> 
+                ))}
             </ul>
-            <form onSubmit={addNewSubject}>
+            <form onSubmit={handleFormSubmit}>
                 <input
                 name='title'
                 placeholder='title'

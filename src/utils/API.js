@@ -155,7 +155,65 @@ const API = {
                 }
                 return res.json()
               })
-            }
+            },
+            getCards:token=>{
+                return fetch(`${URL_PREFIX}/api/cards`,{
+                    method:"GET",
+                    headers:{
+                        "Authorization":`Bearer ${token}`
+                    }
+                }).then(res=>{
+                    if(!res.ok){
+                     throw new Error("invalid token")
+                    }
+                    return res.json()
+                  })
+            },
+            createCard:(token,cardObj)=>{
+                return fetch(`${URL_PREFIX}/api/cards`,{
+                    method:"POST",
+                    body:JSON.stringify(cardObj),
+                    headers:{
+                        "Content-Type":"application/json",
+                        "Authorization":`Bearer ${token}`
+                    }
+                }).then(res=>{
+                    if(!res.ok){
+                     throw new Error("cannot create")
+                    }
+                    return res.json()
+                  })
+            },
+            editCard:(token,cardId,cardObj)=>{
+                return fetch(`${URL_PREFIX}/api/cards/${cardId}`,{
+                    method:"PUT",
+                    body:JSON.stringify(cardObj),
+                    headers:{
+                        "Content-Type":"application/json",
+                        "Authorization":`Bearer ${token}`
+                    }
+                }).then(res=>{
+                    if(!res.ok){
+                     throw new Error("cannot edit")
+                    }
+                    return res.json()
+                  })
+            },
+            deleteCard:(token,cardId)=>{
+                return fetch(`${URL_PREFIX}/api/cards/${cardId}`,{
+                    method:"DELETE",
+                    headers:{
+                        "Content-Type":"application/json",
+                        "Authorization":`Bearer ${token}`
+                    }
+                }).then(res=>{
+                    if(!res.ok){
+                     throw new Error("cannot delete")
+                    }
+                    return res.json()
+                  })
+                },
+      
 }
 
 
