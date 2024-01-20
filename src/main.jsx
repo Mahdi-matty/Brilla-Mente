@@ -6,7 +6,7 @@ import App from './App.jsx'
 import './index.css'
 import Signup from './pages/signup.jsx'
 import HomePage from './pages/HomePage.jsx';
-import SubjectPage from './pages/subjectPage.jsx'
+import SubjectPage from './components/UI/subjectPage.jsx'
 import AssignmentPage from './pages/AssignmentPages.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import QuiztPage from './pages/quizPage.jsx';

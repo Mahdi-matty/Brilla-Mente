@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import API from '../utils/API'
+import API from '../../utils/API'
 
 function SubjectPage(){
     const [subjects, setSubjects] = useState([]);

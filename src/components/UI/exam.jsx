@@ -6,6 +6,8 @@ export default function Exam (){
     const [timer, setTimer] = useState(30);
     const [isAnswered, setIsAnswered] = useState(false);
 
+    // i should make route to sleect subject aor topic and then fetch the cards associated with that here 10 (also probably with difficulty)
+
     useEffect(() => {
         const interval = setInterval(() => {
           setTimer((prevTimer) => prevTimer - 1);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../utils/API'
-import Signup from './signup';
+import Signup from '../components/UI/signup';
 function HomePage() {
   const navigate = useNavigate();
   const [showSignup, setShowSignup] = useState(false);
