@@ -16,7 +16,7 @@ const API = {
           })
     },
     signup:userObj=>{
-        return fetch(`${URL_PREFIX}/api/users/`,{
+        return fetch(`${URL_PREFIX}/api/students/`,{
             method:"POST",
             body:JSON.stringify(userObj),
             headers:{
@@ -30,7 +30,7 @@ const API = {
           })
     },
     getDataFromToken:token=>{
-        return fetch(`${URL_PREFIX}/api/users/datafromtoken`,{
+        return fetch(`${URL_PREFIX}/api/students/datafromtoken`,{
             method:"GET",
             headers:{
                 "Authorization":`Bearer ${token}`

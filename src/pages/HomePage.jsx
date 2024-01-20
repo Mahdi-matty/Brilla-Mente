@@ -1,26 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../utils/API'
+import Signup from './signup';
 function HomePage() {
   const navigate = useNavigate();
-  
+  const [showSignup, setShowSignup] = useState(false);
   const [userName, setuserName] = useState('');
   const [Password, setPassword] = useState('');
   const [token, setToken] = useState("");
 
-  const handleInputChange = (e) => {
-  
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
-
-   
-     if (inputType === 'userName') {
-      setuserName(inputValue);
-    }else if (inputType === 'password'){
-      setPassword(inputValue)
-    }
-  };
   useEffect(()=>{
     const savedToken = localStorage.getItem("token");
     if(savedToken){
@@ -33,7 +21,9 @@ function HomePage() {
   }
 },[])
 
-  const handleFormSubmit =   userObj=>{
+  const handleFormSubmit = (e)=> {
+    e.preventDefault();
+   userObj=>{
     API.login({
       username:userObj.userName,
       password:userObj.password,
@@ -46,7 +36,7 @@ function HomePage() {
 }).catch(err=>{
     console.log(err);
 })
-}
+}} 
 const handleSignup = userObj=>{
   API.signup({
     userName: userObj.userName,
@@ -62,38 +52,41 @@ const handleSignup = userObj=>{
     console.log(err);
 })
 }
+const toggleSignup = () => {
+  setShowSignup(!showSignup);
+  document.querySelector('.formLogin').style.diplay = "none"
+};
+
+
 
   return (
     <div className="container text-center loginDivCont">
       <h1>
       login!
       </h1>
-      <form className="form" onSubmit={handleFormSubmit}>
+      <form className="formLogin" onSubmit={e=>handleFormSubmit(e, { userName, password })}>
         <input
           value={userName}
-          name="username"
-          onChange={handleInputChange}
+          name="userName"
+          onChange={e=> setuserName(e.target.value)}
           type="text"
           placeholder="userName"
         />
         <input
           value={Password}
           name="password"
-          onChange={handleInputChange}
-          type="text"
+          onChange={e=> setPassword(e.target.value)}
+          type="password"
           placeholder="password"
         />
         <button type="submit">
           Login
         </button>
       </form>
-      <Link
-              to={`signup`}
-              className="badge bg-primary rounded-pill"
-              subHandle={handleSignup}
-            >
-              signup
-            </Link>
+      <button onClick={toggleSignup} className="badge bg-primary rounded-pill">
+        Signup
+      </button>
+      {showSignup && <Signup subHandle={handleSignup} />}
     </div>
   );
 }

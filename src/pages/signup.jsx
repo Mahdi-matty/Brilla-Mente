@@ -1,53 +1,29 @@
 import React from 'react';
-import { useState } from 'react';
-const signup = (props) => {
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+const Signup = (props) => {
     const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword]=useState('');
   const [authCode, setAuthCode] = useState(null);
   const [userstatus, setUsrStatus] = useState('studnet');
-
+  
   const [errorMessage, setErrorMessage] = useState('');
 
   const generateAuthCode = () => {
         return Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit code
       };
-
-  const handleInputChange = (e) => {
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
-
-    
-    if (inputType === 'email') {
-      setEmail(inputValue);
-    } else if (inputType === 'userName') {
-      setUserName(inputValue);
-    }else if (inputType === 'password'){
-      setPassword(inputValue)
-    }
-  };
+  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const authCode = generateAuthCode();
-      setAuthCode(authCode);
-      await props.subHandle({
-        userName,
-        email,
-        password,
-        userstatus,
-      });
-      setUserName('');
-      setPassword('');
-      setEmail('');
-      setUsrStatus('student');
-    } catch (error) {
-    console.error("Signup error:", error.message);
-    setErrorMessage("Error during signup. Please try again.");
+    props.subHandle({
+      userName,
+      email,
+      password,
+      userstatus
+    })
   }
-};
 
   return (
     <footer>
@@ -56,21 +32,21 @@ const signup = (props) => {
         <input
           value={userName}
           name="userName"
-          onChange={handleInputChange}
+          onChange={e=>setUserName(e.target.value)}
           type="text"
           placeholder="userName"
         />
         <input
           value={email}
           name="email"
-          onChange={handleInputChange}
+          onChange={e=> setEmail(e.target.value)}
           type="text"
           placeholder="Email"
         />
         <input
           value={password}
           name="password"
-          onChange={handleInputChange}
+          onChange={e=> setPassword(e.target.value)}
           type="text"
           placeholder="password"
         />
@@ -92,4 +68,4 @@ const signup = (props) => {
   );
 };
 
-export default signup;
+export default Signup;
