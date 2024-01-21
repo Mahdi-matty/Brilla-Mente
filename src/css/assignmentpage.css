@@ -1,0 +1,15 @@
+.share-popup {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .share-popup > * {
+    margin-bottom: 10px;
+  }

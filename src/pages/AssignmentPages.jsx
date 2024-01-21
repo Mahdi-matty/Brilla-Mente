@@ -1,5 +1,7 @@
 import YoutubeEmbed from "../components/youtubetest/youtube"
 import React from "react"
+import { useState } from "react";
+import '../css/assignmentpage.css'
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -23,17 +25,32 @@ import {
 
 function AssignmentPage(){
     const youtubeUrl = "https://www.youtube.com/watch?v=cX8Z7BEq25A";
+    const sharebale = 'http://localhost:3000/assignments'
+    const [showSharePopup, setShowSharePopup] = useState(false);
+
+  const handleShareButtonClick = () => {
+    setShowSharePopup(!showSharePopup);
+  };
+
 
     return (
       <div>
         <h1>My React App</h1>
         <YoutubeEmbed url={youtubeUrl} />
-        <h3>what is going on?</h3>
-        <WhatsappShareButton url={'http://localhost:3000/assignments'}>
-          <WhatsappIcon />
-        </WhatsappShareButton>
-      </div>
-    );
-  };
+        <button onClick={handleShareButtonClick}>Share</button>
+        {showSharePopup && (
+        <div className="share-popup">
+          <WhatsappShareButton url={sharebale}>
+            <WhatsappIcon size={32} round />
+          </WhatsappShareButton>
+          <EmailShareButton url={sharebale}>
+            <EmailIcon size={32} round />
+          </EmailShareButton>
+          
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default AssignmentPage
