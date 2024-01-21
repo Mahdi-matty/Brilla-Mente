@@ -4,7 +4,7 @@ import {createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import Signup from './pages/signup.jsx'
+import Signup from '../src/components/UI/signup.jsx'
 import HomePage from './pages/HomePage.jsx';
 import SubjectPage from './components/UI/subjectPage.jsx'
 import AssignmentPage from './pages/AssignmentPages.jsx';

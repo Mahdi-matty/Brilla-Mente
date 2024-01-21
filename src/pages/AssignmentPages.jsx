@@ -1,8 +1,15 @@
+import YoutubeEmbed from "../components/youtubetest/youtube"
+import React from "react"
+
 function AssignmentPage(){
-    // fetch data from back to load assingment that belogn to student
+    const youtubeUrl = "https://www.youtube.com/watch?v=cX8Z7BEq25A";
+
     return (
-        <div></div>
-    )
-}
+      <div>
+        <h1>My React App</h1>
+        <YoutubeEmbed url={youtubeUrl} />
+      </div>
+    );
+  };
 
 export default AssignmentPage
