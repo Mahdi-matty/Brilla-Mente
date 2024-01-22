@@ -3,10 +3,9 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 const Signup = (props) => {
     const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
+  const [username, setUserName] = useState('');
   const [password, setPassword]=useState('');
   const [authCode, setAuthCode] = useState(null);
-  const [userstatus, setUsrStatus] = useState('studnet');
   
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -18,10 +17,9 @@ const Signup = (props) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     props.subHandle({
-      userName,
+      username,
       email,
       password,
-      userstatus
     })
   }
 
@@ -30,11 +28,11 @@ const Signup = (props) => {
       <div className='githubRes'>
       <form className="form" onSubmit={handleFormSubmit}>
         <input
-          value={userName}
-          name="userName"
+          value={username}
+          name="username"
           onChange={e=>setUserName(e.target.value)}
           type="text"
-          placeholder="userName"
+          placeholder="username"
         />
         <input
           value={email}
@@ -50,10 +48,6 @@ const Signup = (props) => {
           type="text"
           placeholder="password"
         />
-        <select value={userstatus} onChange={e=> setUsrStatus(e.target.value)}>
-        <option value='student'>Student</option>
-        <option value='teacher'>Teacher</option>
-        </select>
         <button type="submit">
           Submit
         </button>

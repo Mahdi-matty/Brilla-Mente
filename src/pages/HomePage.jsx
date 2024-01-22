@@ -23,10 +23,13 @@ function HomePage() {
 
   const handleFormSubmit = (e)=> {
     e.preventDefault();
-   userObj=>{
+   const userObj = {
+    userName,
+    Password
+   }
     API.login({
       username:userObj.userName,
-      password:userObj.password,
+      password:userObj.Password,
   }).then(data=>{
       console.log(data);
       setIsLoggedIn(true);
@@ -36,13 +39,12 @@ function HomePage() {
 }).catch(err=>{
     console.log(err);
 })
-}} 
+}
 const handleSignup = userObj=>{
   API.signup({
-    userName: userObj.userName,
+    username: userObj.username,
     email:userObj.email,
     password:userObj.password,
-    userstatus: userObj.userstatus,
 }).then(data=>{
     console.log(data);
     setIsLoggedIn(true);
@@ -64,7 +66,7 @@ const toggleSignup = () => {
       <h1>
       login!
       </h1>
-      <form className="formLogin" onSubmit={e=>handleFormSubmit(e, { userName, password })}>
+      <form className="formLogin" onSubmit={e=>handleFormSubmit(e, { userName, Password })}>
         <input
           value={userName}
           name="userName"
