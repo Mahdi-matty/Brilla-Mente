@@ -1,12 +1,12 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import API from '../../utils/API'
 
-function SubjectPage(){
+function SubjectPage(props){
     const [subjects, setSubjects] = useState([]);
     const [newsubject, setNewSubject] = useState('')
-
-    const { state: { token } } = useLocation();
+  const { token } = useParams();
+  
     console.log(token)
 
     useEffect(()=>{

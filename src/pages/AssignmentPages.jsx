@@ -2,6 +2,7 @@ import YoutubeEmbed from "../components/youtubetest/youtube"
 import React from "react"
 import { useState } from "react";
 import '../css/assignmentpage.css'
+import { AuthProvider } from "../utils/Authcontext";
 import {
   EmailShareButton,
   FacebookShareButton,

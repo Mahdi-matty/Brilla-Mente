@@ -14,7 +14,7 @@ import { useState } from 'react';
               <li>
               <Link
               to="/subjects"
-              onClick={() => navigate('/subjects', { state: { token } })}
+              onClick={() => navigate(`/subjects/${token}`)}
               className="badge bg-primary rounded-pill"
             >
                      <FaFileAlt className="iconSize"/> {/* Icon for Posts */}
