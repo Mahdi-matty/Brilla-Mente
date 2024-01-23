@@ -7,6 +7,7 @@ function SubjectPage(){
     const [newsubject, setNewSubject] = useState('')
 
     const { state: { token } } = useLocation();
+    console.log(token)
 
     useEffect(()=>{
         fetch("http://localhost:3000/api/subjects",{
@@ -19,7 +20,7 @@ function SubjectPage(){
       },[])
     // here i have to fetch subjects
     const handleFormSubmit = e=>{
-      e.preventDefault;
+      e.preventDefault();
       const subjectObj = {
         subject: subjects
       }

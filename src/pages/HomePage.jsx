@@ -8,7 +8,7 @@ function HomePage() {
   const [userName, setuserName] = useState('');
   const [Password, setPassword] = useState('');
   const [token, setToken] = useState("");
-
+ const [loggedin, setIsLoggedIn] = useState(false)
   useEffect(()=>{
     const savedToken = localStorage.getItem("token");
     if(savedToken){
@@ -35,7 +35,7 @@ function HomePage() {
       setIsLoggedIn(true);
       setToken(data.token);
       localStorage.setItem("token",data.token)
-      navigate.push('/profile', { state: { token: data.token } })
+      navigate('/profile', { state: { token: data.token } })
 }).catch(err=>{
     console.log(err);
 })
