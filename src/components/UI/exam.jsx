@@ -5,9 +5,48 @@ export default function Exam (){
     const [question, setQuestion] = useState(1);
     const [timer, setTimer] = useState(30);
     const [isAnswered, setIsAnswered] = useState(false);
-    const ntokrn = localStorage.getItem('token')
+    const [subjects, setSubjects] = useState([])
+    const [selectedSubject, setSelectedSubject] = useState("");
+    const [topics, setTopic] = useState([])
+    const [selectedTopic, setSelectedTopic] = useState("");
+    const [difficulty, setDifficulty] = useState("");
+    const [cards, setCards] = useState([])
+    const tokrn = localStorage.getItem('token')
 
     // i should make route to sleect subject aor topic and then fetch the cards associated with that here 10 (also probably with difficulty)
+    useEffect(()=>{
+      fetch("http://localhost:3001/api/subjects",{
+        headers:{
+          Authorization:`Bearer ${tokrn}`
+        }
+      }).then(res=>res.json()).then(data=>{
+        console.log('data', data)
+        setSubjects(data)
+      })
+    },[])
+    useEffect(()=>{
+      fetch("http://localhost:3001/api/topics",{
+        headers:{
+          Authorization:`Bearer ${tokrn}`
+        }
+      }).then(res=>res.json()).then(data=>{
+        console.log('data', data)
+        setTopic(data)
+      })
+    },[])
+    useEffect(() => {
+      if (selectedSubject && selectedTopic && difficulty) {
+        fetch(`http://localhost:3001/api/cards?subject=${selectedSubject}&topic=${selectedTopic}&difficulty=${difficulty}`, {
+          headers: {
+            Authorization: `Bearer ${tokrn}`
+          }
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setCards(data);
+          });
+      }
+    }, [selectedSubject, selectedTopic, difficulty, tokrn]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -37,23 +76,51 @@ export default function Exam (){
             setTimer(30);
           }
         };
-    return (
-    <>
-    <div>
-        <p>Question {question}</p>
-        <p>Time left: {timer} seconds</p>
-        {!isAnswered && (
+        return (
           <>
-            <button onClick={() => handleAnswer(true)}>Correct</button>
-            <button onClick={() => handleAnswer(false)}>Incorrect</button>
+            <div>
+              <p>Select Subject:</p>
+              <select onChange={(e) => setSelectedSubject(e.target.value)}>
+                <option value="">Select Subject</option>
+                {subjects.map((subject) => (
+                  <option key={subject.id} value={subject.id}>
+                    {subject.title}
+                  </option>
+                ))}
+              </select>
+              <p>Select Topic:</p>
+              <select onChange={(e) => setSelectedTopic(e.target.value)}>
+                <option value="">Select Topic</option>
+                {topics.map((topic) => (
+                  <option key={topic.id} value={topic.id}>
+                    {topic.title}
+                  </option>
+                ))}
+              </select>
+              <p>Select Difficulty:</p>
+              <select onChange={(e) => setDifficulty(e.target.value)}>
+                <option value="">Select Difficulty</option>
+                <option value="low">Easy</option>
+                <option value="med">Medium</option>
+                <option value="high">Hard</option>
+              </select>
+            </div>
+      
+            <div>
+              <p>Question {question}</p>
+              <p>Time left: {timer} seconds</p>
+              {!isAnswered && (
+                <>
+                  <button onClick={() => handleAnswer(true)}>Correct</button>
+                  <button onClick={() => handleAnswer(false)}>Incorrect</button>
+                </>
+              )}
+            </div>
+      
+            <div>
+              <p>Score: {score}</p>
+              {question <= 10 && <button onClick={() => setIsAnswered(false)}>Next Question</button>}
+            </div>
           </>
-        )}
-      </div>
-      <div>
-        <p>Score: {score}</p>
-        {question <= 10 && <button onClick={() => setIsAnswered(false)}>Next Question</button>}
-      </div>
-    </> 
-    )
-   
-}
+        );
+      }
