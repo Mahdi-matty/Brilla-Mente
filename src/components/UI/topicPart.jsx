@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 
 export default function TopictPart (){
@@ -6,17 +6,17 @@ export default function TopictPart (){
     const [title, setTtile] = useState('')
     const [difficulty, setDifficulty] = useState();
     const [content, setContent] = useState('')
-    const { search } = useLocation();
-    const urlParams = new URLSearchParams(search);
-    const token = urlParams.get('token') || '';
+    
+    const token = localStorage.getItem('tokrn')
 
     useEffect(()=>{
-        fetch("http://localhost:3000/api/cards",{
+        fetch("http://localhost:3001/api/cards",{
           headers:{
             Authorization:`Bearer ${token}`
           }
         }).then(res=>res.json()).then(data=>{
           console.log('data', data)
+          setCard(data)
         })
       },[])
       const editeCard = (id,obj)=>{

@@ -3,6 +3,7 @@ import Exam from "../components/UI/exam";
 function QuiztPage(){
     const [subject, setSubject] = useState('');
     const [isSelected, setIsSelected] = useState(false)
+    const gtoken = localStorage.getItem('token')
     const handleStartClick = () => {
         setIsSelected(true);
       };

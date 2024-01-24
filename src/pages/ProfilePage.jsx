@@ -4,7 +4,7 @@ import Footer from '../components/footer'
 import { useState } from 'react';
  function ProfilePage() {
  const location = useLocation()
-  const { state: { token } } = location;
+  const token =  localStorage.getItem('token')
   const navigate = useNavigate()
 
     return (

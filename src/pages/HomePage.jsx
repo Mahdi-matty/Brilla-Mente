@@ -35,7 +35,7 @@ function HomePage() {
       setIsLoggedIn(true);
       setToken(data.token);
       localStorage.setItem("token",data.token)
-      navigate('/profile', { state: { token: data.token } })
+      navigate('/profile')
 }).catch(err=>{
     console.log(err);
 })

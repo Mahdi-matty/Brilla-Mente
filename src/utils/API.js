@@ -42,19 +42,31 @@ const API = {
             return res.json()
           })
     },
-    getSubject:token=>{
-        return fetch(`${URL_PREFIX}/api/subjects`,{
-            method:"GET",
-            headers:{
-                "Authorization":`Bearer ${token}`
+    getSubject: (token) => {
+        return fetch(`${URL_PREFIX}/api/subjects/student-subjects`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+            if (!res.ok) {
+              console.error('Invalid token');
+              throw new Error("Invalid token");
             }
-        }).then(res=>{
-            if(!res.ok){
-             throw new Error("invalid token")
-            }
-            return res.json()
+            return res.text(); 
           })
-    },
+          .then((text) => {
+            console.log('getSubject Response Text:', text);
+            const data = JSON.parse(text); 
+            console.log('getSubject Data:', data);
+            return data;
+          })
+          .catch((err) => {
+            console.error('getSubject Error:', err);
+            throw err;
+          });
+      },
     createSubject:(token,subjectObj)=>{
         return fetch(`${URL_PREFIX}/api/subjects`,{
             method:"POST",
@@ -100,7 +112,7 @@ const API = {
           })
         },
         getTopics:token=>{
-            return fetch(`${URL_PREFIX}/api/subjects`,{
+            return fetch(`${URL_PREFIX}/api/topics`,{
                 method:"GET",
                 headers:{
                     "Authorization":`Bearer ${token}`

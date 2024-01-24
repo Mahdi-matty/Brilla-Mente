@@ -5,6 +5,7 @@ export default function Exam (){
     const [question, setQuestion] = useState(1);
     const [timer, setTimer] = useState(30);
     const [isAnswered, setIsAnswered] = useState(false);
+    const ntokrn = localStorage.getItem('token')
 
     // i should make route to sleect subject aor topic and then fetch the cards associated with that here 10 (also probably with difficulty)
 
