@@ -29,6 +29,34 @@ const API = {
             return res.json()
           })
     },
+    teacherlogin:userObj=>{
+        return fetch(`${URL_PREFIX}/api/teachers/login`,{
+            method:"POST",
+            body:JSON.stringify(userObj),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(res=>{
+            if(!res.ok){
+             throw new Error("invalid login")
+            }
+            return res.json()
+          })
+    },
+    teachersignup:userObj=>{
+        return fetch(`${URL_PREFIX}/api/teachers/`,{
+            method:"POST",
+            body:JSON.stringify(userObj),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(res=>{
+            if(!res.ok){
+             throw new Error("invalid signup")
+            }
+            return res.json()
+          })
+    },
     getDataFromToken:token=>{
         return fetch(`${URL_PREFIX}/api/students/datafromtoken`,{
             method:"GET",
