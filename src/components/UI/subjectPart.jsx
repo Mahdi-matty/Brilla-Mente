@@ -6,7 +6,7 @@ export default function SubjectPart (){
     const [topics, setTopic] = useState([])
     const [newtopic, setNewTopic] = useState('');
     const token = localStorage.getItem('token')
-    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com/"
+    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
     useEffect(()=>{
         fetch(`${URL_PREFIX}/api/topics`,{
           headers:{

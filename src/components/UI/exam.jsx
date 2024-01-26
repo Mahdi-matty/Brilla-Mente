@@ -12,7 +12,7 @@ export default function Exam (){
     const [difficulty, setDifficulty] = useState("");
     const [cards, setCards] = useState([])
     const tokrn = localStorage.getItem('token')
-    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com/"
+    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
 
     // i should make route to sleect subject aor topic and then fetch the cards associated with that here 10 (also probably with difficulty)
     useEffect(()=>{

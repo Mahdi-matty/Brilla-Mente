@@ -1,4 +1,4 @@
-const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com/"
+const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
 
 const API = {
     login:userObj=>{
