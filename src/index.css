@@ -37,6 +37,11 @@ body {
   justify-content: center;
   height: 100vh;
 }
+.teacherLog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 nav {
   position: fixed;
   width: 100%;

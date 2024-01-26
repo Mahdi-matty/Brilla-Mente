@@ -12,6 +12,7 @@ import ProfilePage from './pages/ProfilePage.jsx';
 import QuiztPage from './pages/quizPage.jsx';
 import SubjectPart from './components/UI/subjectPart.jsx';
 import TopictPart from './components/UI/topicPart.jsx';
+import TeacherLoging from './pages/TeacherLogin.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <Signup />,
+      },
+      {
+        path: '/teacherlogin',
+        element: <TeacherLoging />,
       },
       {
         path: '/profile',

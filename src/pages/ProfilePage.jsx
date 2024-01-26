@@ -1,11 +1,27 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaFileAlt, FaBook, FaQuestionCircle } from 'react-icons/fa';
 import Footer from '../components/footer'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
  function ProfilePage() {
- const location = useLocation()
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const token =  localStorage.getItem('token')
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem('token');
+    if (savedToken) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  if (!isLoggedIn) {
+    return (
+      <div className="container text-center">
+        <h1>Please log in to access your profile.</h1>
+        <Link to="/">Back to Home</Link>
+      </div>
+    );
+  }
 
     return (
         <div>
@@ -24,7 +40,7 @@ import { useState } from 'react';
               <li>
               <Link
               to="/assignments"
-              onClick={() => navigate('/assignments', { state: { token } })}
+              onClick={() => navigate('/assignments')}
               className="badge bg-primary rounded-pill"
             >
                      <FaBook className="iconSize"/> {/* Icon for Assignments */}
@@ -34,7 +50,7 @@ import { useState } from 'react';
               <li>
               <Link
               to="/quiz"
-              onClick={() => navigate('/quiz', { state: { token } })}
+              onClick={() => navigate('/quiz')}
               className="badge bg-primary rounded-pill"
             >
                      <FaQuestionCircle className="iconSize"/> {/* Icon for Assignments */}

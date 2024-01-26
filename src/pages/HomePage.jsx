@@ -62,7 +62,8 @@ const toggleSignup = () => {
 
 
   return (
-    <div className="container text-center loginDivCont">
+    <>
+     <div className="container text-center loginDivCont">
       <h1>
       login!
       </h1>
@@ -90,6 +91,14 @@ const toggleSignup = () => {
       </button>
       {showSignup && <Signup subHandle={handleSignup} />}
     </div>
+    <div className='teacherLog'>
+      <Link to='/teacherlogin'>
+        <button>
+          Teachers
+          </button></Link>
+    </div>
+    </>
+   
   );
 }
 

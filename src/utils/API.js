@@ -1,4 +1,4 @@
-const URL_PREFIX="http://localhost:3001"
+const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com/"
 
 const API = {
     login:userObj=>{
