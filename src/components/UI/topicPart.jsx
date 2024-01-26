@@ -8,9 +8,9 @@ export default function TopictPart (){
     const [content, setContent] = useState('')
     
     const token = localStorage.getItem('tokrn')
-
+    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com/"
     useEffect(()=>{
-        fetch("http://localhost:3001/api/cards",{
+        fetch(`${URL_PREFIX}/api/cards`,{
           headers:{
             Authorization:`Bearer ${token}`
           }

@@ -12,10 +12,11 @@ export default function Exam (){
     const [difficulty, setDifficulty] = useState("");
     const [cards, setCards] = useState([])
     const tokrn = localStorage.getItem('token')
+    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com/"
 
     // i should make route to sleect subject aor topic and then fetch the cards associated with that here 10 (also probably with difficulty)
     useEffect(()=>{
-      fetch("http://localhost:3001/api/subjects",{
+      fetch(`${URL_PREFIX}api/subjects`,{
         headers:{
           Authorization:`Bearer ${tokrn}`
         }
@@ -25,7 +26,7 @@ export default function Exam (){
       })
     },[])
     useEffect(()=>{
-      fetch("http://localhost:3001/api/topics",{
+      fetch(`${URL_PREFIX}/api/topics`,{
         headers:{
           Authorization:`Bearer ${tokrn}`
         }
@@ -36,7 +37,7 @@ export default function Exam (){
     },[])
     useEffect(() => {
       if (selectedSubject && selectedTopic && difficulty) {
-        fetch(`http://localhost:3001/api/cards?subject=${selectedSubject}&topic=${selectedTopic}&difficulty=${difficulty}`, {
+        fetch(`${URL_PREFIX}/api/cards?subject=${selectedSubject}&topic=${selectedTopic}&difficulty=${difficulty}`, {
           headers: {
             Authorization: `Bearer ${tokrn}`
           }

@@ -7,10 +7,11 @@ function SubjectPage(props){
     const [newsubject, setNewSubject] = useState('')
     const [loading, setLoading] = useState(true);
   const  token  = localStorage.getItem('token')
+  const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com/"
 
     useEffect(()=>{
       setLoading(true);
-        fetch("http://localhost:3001/api/subjects/student-subjects",{
+        fetch(`${URL_PREFIX}/api/subjects/student-subjects`,{
           headers:{
             Authorization:`Bearer ${token}`
           }
