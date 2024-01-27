@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../utils/API'
-import TeacherSignup from '../components/UI/teachsignup'
+import TeacherSignup from '../components/teacherui/teachsignup'
 function teacherLoging(){
   const navigate = useNavigate();
   const [showSignup, setShowSignup] = useState(false);
@@ -58,7 +58,7 @@ function teacherLoging(){
   }
   const toggleSignup = () => {
     setShowSignup(!showSignup);
-    document.querySelector('.formLogin').style.diplay = "none"
+    document.querySelector('.teacherLogin').style.diplay = "none"
   };
 
 

@@ -13,7 +13,7 @@ import QuiztPage from './pages/quizPage.jsx';
 import SubjectPart from './components/UI/subjectPart.jsx';
 import TopictPart from './components/UI/topicPart.jsx';
 import TeacherLoging from './pages/TeacherLogin.jsx';
-import TeacherSignup from './components/UI/teachsignup.jsx';
+import TeacherSignup from './components/teacherui/teachsignup.jsx';
 
 const router = createBrowserRouter([
   {
