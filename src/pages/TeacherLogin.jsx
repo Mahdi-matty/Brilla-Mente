@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import API from '../utils/API'
 import TeacherSignup from '../components/teacherui/teachsignup'
 function teacherLoging(){
@@ -87,6 +87,9 @@ function teacherLoging(){
         Signup
       </button>
       {showSignup && <TeacherSignup subHandle={handleSignup} />}
+    </div>
+    <div>
+      Login with your Github!
     </div>
     </>
   )

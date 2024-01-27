@@ -59,6 +59,7 @@ import { useState, useEffect } from 'react';
               </li>
             </ul>
           </nav> 
+          <Footer />
         </div>
     )
 }

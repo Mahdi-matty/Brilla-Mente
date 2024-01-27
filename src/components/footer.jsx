@@ -1,12 +1,12 @@
 import React from 'react';
 import BrillaLogo from '../assets/brillam.png'
+import {FaBell} from 'react-icons/fa'
 
 const Footer = () => {
   return (
     <footer>
-      <div className='githubRes'>
-          <a href='https://github.com/Mahdi-matty'>Github</a>
-          <a href='https://github.com/DavidRodriguez119'>Github</a>
+      <div className='notficationDiv'>
+          <p><FaBell className="iconSize"/>Notification</p>
         </div>
     </footer>
   );
