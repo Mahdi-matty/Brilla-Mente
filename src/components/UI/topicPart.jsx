@@ -103,6 +103,12 @@ export default function TopictPart (){
       const shareWithUserName = ()=> {
         e.preventDefault();
         const cardShare = this.closest('.cardInQuestion')
+        const cardObj ={
+          title: cardShare.title,
+          content: cardShare.content,
+          difficulty: cardShare.difficulty
+        }
+
 
       } 
     return (
