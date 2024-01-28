@@ -84,29 +84,26 @@ export default function TopictPart (){
       const shareCard = id => {
         setShowSharePopup(!showSharePopup);
       }
-      async function getsuggestion(input){
-       const sugdev= document.querySelector('.userSuggestion');
-       sugdev.textContent = '';
-       if (input.length == 0){
-        return;
-       }
-       try {
-        const response = await fetch(`${URL_PREFIX}/api/students?prefix=${input}`)
-        const usernames= await response.json();
+      const handleUsernameChange = async (e) => {
+        const input = e.target.value;
+        setUsername(input);
+        if (input.length === 0) {
+            setSuggestions([]);
+            return;
+        }
+        try {
+            const response = await fetch(`${URL_PREFIX}/api/students?prefix=${input}`);
+            const usernames = await response.json();
+            setSuggestions(usernames);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-        usernames.forEach((username)=> {
-          const userli = document.createElement('li');
-          userli.textContent = username;
-          sugdev.appendChild(userli)
-        })
-
-       }catch(error){
-        console.log(error)
-
-       }
-      }   
       const shareWithUserName = ()=> {
         e.preventDefault();
+        const cardShare = this.closest('.cardInQuestion')
+
       } 
     return (
         <>
@@ -114,7 +111,7 @@ export default function TopictPart (){
             <h2>Topics</h2>
             <ul>
             {cards.map((card)=>(
-                  <li key={card.id}>
+                  <li className='cardInQuestion' key={card.id}>
                     <p>{card.title}</p>
                     <p>{card.content}</p>
                     <button onClick={() => editeCard(card.id)}>Edit</button>
@@ -122,15 +119,15 @@ export default function TopictPart (){
                     <button className="cardShareIt" onClick={()=>shareCard(card.id)}>Share</button>
                         {showSharePopup && (
                         <div className="share-popup">
-                          <WhatsappShareButton >
+                          <WhatsappShareButton url={card.id}>
                             <WhatsappIcon size={32} round />
                           </WhatsappShareButton>
-                          <EmailShareButton >
+                          <EmailShareButton url={card.id}>
                             <EmailIcon size={32} round />
                           </EmailShareButton>
                           <form onSubmit={shareWithUserName}>
                             <input                            name="username"
-                            onChange={e=>getsuggestion(e.target.value)}
+                            onChange={handleUsernameChange}
                             type="text"
                             placeholder="username"
                           /><ul className="userSuggestion"></ul>
