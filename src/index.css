@@ -175,6 +175,15 @@ button {
   padding: 10px;
   cursor: pointer;
 }
+.examDiv {
+  display: flex;
+  width: 100vh;
+}
+.selectExamSubject .selectExamDifficulty {
+  width: 25px;
+  left: 50px;
+  margin: 5px;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

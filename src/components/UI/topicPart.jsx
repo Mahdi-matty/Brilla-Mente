@@ -1,14 +1,36 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, createElement } from "react"
 import { Link } from 'react-router-dom'
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  MailruShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+
+  EmailIcon,
+  FacebookIcon,
+  FacebookMessengerIcon,
+  LinkedinIcon,
+  MailruIcon,
+  RedditIcon,
+  TelegramIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from "react-share";
 
 export default function TopictPart (){
     const [cards, setCard] = useState([])
     const [title, setTtile] = useState('')
     const [difficulty, setDifficulty] = useState();
     const [content, setContent] = useState('')
+    const [username, setUserName] = useState('')
     
     const token = localStorage.getItem('tokrn')
-    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+    // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+    const URL_PREFIX = "http://localhost:3001"
     useEffect(()=>{
         fetch(`${URL_PREFIX}/api/cards`,{
           headers:{
@@ -58,6 +80,30 @@ export default function TopictPart (){
               console.log(err)
             })
       }
+      const shareCard = id => {
+       
+      }
+      async function getsuggestion(input){
+       const sugdev= document.querySelector('.serSuggestion');
+       sugdev.textContent = '';
+       if (input.length == 0){
+        return;
+       }
+       try {
+        const response = fetch(`${URL_PREFIX}/api/users?prefix=${input}`)
+        const usernames= await response.json();
+
+        usernames.forEach((username)=> {
+          const userli = document.createElement('li');
+          userli.textContent = username;
+
+        })
+
+       }catch(error){
+        console.log(error)
+
+       }
+      }
 
     
     return (
@@ -66,12 +112,31 @@ export default function TopictPart (){
             <h2>Topics</h2>
             <ul>
             {cards.map((card)=>(
-                    <li key={card.id}>
+                  <li key={card.id}>
                     <p>{card.title}</p>
                     <p>{card.content}</p>
                     <button onClick={() => editeCard(card.id)}>Edit</button>
                     <button onClick={() => delCard(card.id)}>Delete</button>
-                    </li>
+                    <button onClick={()=>shareCard(card.id)}>Share</button>
+                        {showSharePopup && (
+                        <div className="share-popup">
+                          <WhatsappShareButton url={sharebale}>
+                            <WhatsappIcon size={32} round />
+                          </WhatsappShareButton>
+                          <EmailShareButton url={sharebale}>
+                            <EmailIcon size={32} round />
+                          </EmailShareButton>
+                          <input
+                            value={username}
+                            name="username"
+                            onChange={e=>setUserName(e.target.value)}
+                            type="text"
+                            placeholder="username"
+                          /><ul className="userSuggestion"></ul>
+                          
+                        </div>
+                      )}
+                  </li>
                 ))}
             </ul>
            </div>

@@ -5,26 +5,16 @@ export default function Exam (){
     const [question, setQuestion] = useState(1);
     const [timer, setTimer] = useState(30);
     const [isAnswered, setIsAnswered] = useState(false);
-    const [subjects, setSubjects] = useState([])
-    const [selectedSubject, setSelectedSubject] = useState("");
     const [topics, setTopic] = useState([])
     const [selectedTopic, setSelectedTopic] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [cards, setCards] = useState([])
     const tokrn = localStorage.getItem('token')
-    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+    // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+    const URL_PREFIX = "http://localhost:3001"
 
     // i should make route to sleect subject aor topic and then fetch the cards associated with that here 10 (also probably with difficulty)
-    useEffect(()=>{
-      fetch(`${URL_PREFIX}api/subjects`,{
-        headers:{
-          Authorization:`Bearer ${tokrn}`
-        }
-      }).then(res=>res.json()).then(data=>{
-        console.log('data', data)
-        setSubjects(data)
-      })
-    },[])
+   
     useEffect(()=>{
       fetch(`${URL_PREFIX}/api/topics`,{
         headers:{
@@ -36,18 +26,27 @@ export default function Exam (){
       })
     },[])
     useEffect(() => {
-      if (selectedSubject && selectedTopic && difficulty) {
-        fetch(`${URL_PREFIX}/api/cards?subject=${selectedSubject}&topic=${selectedTopic}&difficulty=${difficulty}`, {
-          headers: {
-            Authorization: `Bearer ${tokrn}`
-          }
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setCards(data);
-          });
+      if (selectedTopic && difficulty) {
+        fetchCards();
       }
-    }, [selectedSubject, selectedTopic, difficulty, tokrn]);
+    }, [selectedTopic, difficulty, tokrn]);
+    
+    const fetchCards = () => {
+      fetch(`${URL_PREFIX}/api/cards?topic=${selectedTopic}&difficulty=${difficulty}`, {
+        headers: {
+          Authorization: `Bearer ${tokrn}`
+        }
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        setCards(data);
+      });
+    };
+    
+    const findCards = (event) => {
+      event.preventDefault();
+      fetchCards();
+    };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -74,23 +73,15 @@ export default function Exam (){
               setScore((prevScore) => prevScore + 5);
             }
       
-            setTimer(30);
+            setTimer(10);
           }
         };
         return (
           <>
-            <div>
-              <p>Select Subject:</p>
-              <select onChange={(e) => setSelectedSubject(e.target.value)}>
-                <option value="">Select Subject</option>
-                {subjects.map((subject) => (
-                  <option key={subject.id} value={subject.id}>
-                    {subject.title}
-                  </option>
-                ))}
-              </select>
+            <div className="examDiv">
               <p>Select Topic:</p>
-              <select onChange={(e) => setSelectedTopic(e.target.value)}>
+              <form onSubmit={findCards}> 
+                <select className="selectExamTopic" onChange={(e) => setSelectedTopic(e.target.value)}>
                 <option value="">Select Topic</option>
                 {topics.map((topic) => (
                   <option key={topic.id} value={topic.id}>
@@ -99,12 +90,15 @@ export default function Exam (){
                 ))}
               </select>
               <p>Select Difficulty:</p>
-              <select onChange={(e) => setDifficulty(e.target.value)}>
+              <select className="selectExamDifficulty" onChange={(e) => setDifficulty(e.target.value)}>
                 <option value="">Select Difficulty</option>
                 <option value="low">Easy</option>
                 <option value="med">Medium</option>
                 <option value="high">Hard</option>
               </select>
+              <button type="submit">Start</button>
+              </form>
+              
             </div>
       
             <div>
