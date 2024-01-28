@@ -26,9 +26,10 @@ export default function TopictPart (){
     const [title, setTtile] = useState('')
     const [difficulty, setDifficulty] = useState();
     const [content, setContent] = useState('')
-    const [username, setUserName] = useState('')
+    const [showSharePopup, setShowSharePopup] = useState(false);
+
     
-    const token = localStorage.getItem('tokrn')
+    const token = localStorage.getItem('token')
     // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
     const URL_PREFIX = "http://localhost:3001"
     useEffect(()=>{
@@ -81,31 +82,32 @@ export default function TopictPart (){
             })
       }
       const shareCard = id => {
-       
+        setShowSharePopup(!showSharePopup);
       }
       async function getsuggestion(input){
-       const sugdev= document.querySelector('.serSuggestion');
+       const sugdev= document.querySelector('.userSuggestion');
        sugdev.textContent = '';
        if (input.length == 0){
         return;
        }
        try {
-        const response = fetch(`${URL_PREFIX}/api/users?prefix=${input}`)
+        const response = await fetch(`${URL_PREFIX}/api/students?prefix=${input}`)
         const usernames= await response.json();
 
         usernames.forEach((username)=> {
           const userli = document.createElement('li');
           userli.textContent = username;
-
+          sugdev.appendChild(userli)
         })
 
        }catch(error){
         console.log(error)
 
        }
-      }
-
-    
+      }   
+      const shareWithUserName = ()=> {
+        e.preventDefault();
+      } 
     return (
         <>
         <div>
@@ -117,22 +119,23 @@ export default function TopictPart (){
                     <p>{card.content}</p>
                     <button onClick={() => editeCard(card.id)}>Edit</button>
                     <button onClick={() => delCard(card.id)}>Delete</button>
-                    <button onClick={()=>shareCard(card.id)}>Share</button>
+                    <button className="cardShareIt" onClick={()=>shareCard(card.id)}>Share</button>
                         {showSharePopup && (
                         <div className="share-popup">
-                          <WhatsappShareButton url={sharebale}>
+                          <WhatsappShareButton >
                             <WhatsappIcon size={32} round />
                           </WhatsappShareButton>
-                          <EmailShareButton url={sharebale}>
+                          <EmailShareButton >
                             <EmailIcon size={32} round />
                           </EmailShareButton>
-                          <input
-                            value={username}
-                            name="username"
-                            onChange={e=>setUserName(e.target.value)}
+                          <form onSubmit={shareWithUserName}>
+                            <input                            name="username"
+                            onChange={e=>getsuggestion(e.target.value)}
                             type="text"
                             placeholder="username"
                           /><ul className="userSuggestion"></ul>
+                           <button type="submit">Share</button>
+                          </form>
                           
                         </div>
                       )}
