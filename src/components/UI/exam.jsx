@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react"
 
 export default function Exam (){
-    const [questionIndex, setQuestionIndex] = useState(0);
+    const [questionIndex, setQuestionIndex] = useState(-1);
     const [timer, setTimer] = useState(10);
     const [isAnswered, setIsAnswered] = useState(false);
     const [topics, setTopic] = useState([])
     const [selectedTopic, setSelectedTopic] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [cards, setCards] = useState([])
-    const [userResponses, setUserResponses] = useState([]);
     const tokrn = localStorage.getItem('token')
     const [showexamDivStart, setShowexamDivStart] = useState(false);
     // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
@@ -47,26 +46,36 @@ export default function Exam (){
     const showExamDiv = (e)=> {
       e.preventDefault();
       setShowexamDivStart(true)
+      setIsAnswered(false)
     }
-    const handleAnswer = (isCorrect) => {
-      if (!isAnswered) {
-          setIsAnswered(true);
-          setUserResponses(prevResponses => {
-              const updatedResponses = [...prevResponses];
-              updatedResponses[questionIndex] = isCorrect;
-              return updatedResponses;
-          });
-          setQuestionIndex(prevIndex => prevIndex + 1);
-          setTimer(10);
-      }
-  };
     useEffect(() => {
-        const interval = setInterval(() => {
-          setTimer((prevTimer) => prevTimer - 1);
-        }, 1000);
+      const interval = setInterval(() => {
+          setTimer((prevTimer) => {
+              if (prevTimer > 0 && !isAnswered) {
+                  return prevTimer - 1;
+              } else {
+                  clearInterval(interval);
+                  return prevTimer;
+              }
+          });
+      }, 1000);
+
+      return () => clearInterval(interval);
+  }, [questionIndex, isAnswered]);
+
+   
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //       setTimer((prevTimer) => prevTimer - 1);
+    //     }, 1000);
     
-        return () => clearInterval(interval);
-      }, [questionIndex]);
+    //     return () => clearInterval(interval);
+    //   }, [questionIndex]);
+      const nextQuestion = () => {
+        setIsAnswered(false);
+        setTimer(10)
+        setQuestionIndex((question)=> question+1)
+      }
     
       useEffect(() => {
         if (timer === 0) {
@@ -75,14 +84,14 @@ export default function Exam (){
           }
         }, [timer]);
       
-        useEffect(() => {
-          if (!isAnswered) {
-            setIsAnswered(true);
-            setQuestionIndex((prevQuestion) => prevQuestion + 1);
+      //   useEffect(() => {
+      //     if (!isAnswered) {
+      //       setIsAnswered(true);
+      //       setQuestionIndex((prevQuestion) => prevQuestion + 1);
       
-            setTimer(10);
-          }
-        }, [timer, isAnswered])
+      //       setTimer(10);
+      //     }
+      //   }, [timer, isAnswered])
         return (
           <>
             <div className="examDiv">
@@ -97,7 +106,7 @@ export default function Exam (){
                 ))}
               </select>
               <p>Select Difficulty:</p>
-              <select className="selectExamDifficulty" onChange={(e) => setDifficulty(e.target.value)} multiple>
+              <select className="selectExamDifficulty" onChange={(e) => setDifficulty(e.target.value)} multiple={true}>
                 <option value="">Select Difficulty</option>
                 <option value="1">easy</option>
                 <option value="2">medium</option>
@@ -116,15 +125,10 @@ export default function Exam (){
                       {isAnswered && questionIndex === index && <p>{card.content}</p>}
                   </li>
               ))}
+              <button onClick={nextQuestion}>Next</button>
           </ul>
 
           <p>Time left: {timer} seconds</p>
-          {!isAnswered && (
-              <>
-                  <button onClick={() => handleAnswer(true)}>Correct</button>
-                  <button onClick={() => handleAnswer(false)}>Incorrect</button>
-              </>
-          )}
       </div>
             )}
             
