@@ -20,6 +20,7 @@ import {
   TwitterIcon,
   WhatsappIcon,
 } from "react-share";
+import API from "../../utils/API";
 
 export default function TopictPart (){
     const [cards, setCard] = useState([])
@@ -27,11 +28,12 @@ export default function TopictPart (){
     const [difficulty, setDifficulty] = useState();
     const [content, setContent] = useState('')
     const [showSharePopup, setShowSharePopup] = useState(false);
+    const [studentId, setStudentId] = useState('')
 
     
     const token = localStorage.getItem('token')
-    // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
-    const URL_PREFIX = "http://localhost:3001"
+    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+    // const URL_PREFIX = "http://localhost:3001"
     useEffect(()=>{
         fetch(`${URL_PREFIX}/api/cards`,{
           headers:{
@@ -95,7 +97,11 @@ export default function TopictPart (){
             const response = await fetch(`${URL_PREFIX}/api/students?prefix=${input}`);
             const usernames = await response.json();
             setSuggestions(usernames);
-        } catch (error) {
+            API.getIdByUserName(token).then(studentId=>{
+              setStudentId(studentId)
+            }).catch(error=>{
+              console.log(error)
+            })} catch (error) {
             console.log(error);
         }
     };
@@ -123,7 +129,7 @@ export default function TopictPart (){
                     <button onClick={() => editeCard(card.id)}>Edit</button>
                     <button onClick={() => delCard(card.id)}>Delete</button>
                     <button className="cardShareIt" onClick={()=>shareCard(card.id)}>Share</button>
-                        {showSharePopup && (
+                        {/* {showSharePopup && (
                         <div className="share-popup">
                           <WhatsappShareButton url={card.id}>
                             <WhatsappIcon size={32} round />
@@ -141,7 +147,7 @@ export default function TopictPart (){
                           </form>
                           
                         </div>
-                      )}
+                      )} */}
                   </li>
                 ))}
             </ul>

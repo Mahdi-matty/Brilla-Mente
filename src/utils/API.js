@@ -1,5 +1,5 @@
-// const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
-const URL_PREFIX = "http://localhost:3001"
+const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+// const URL_PREFIX = "http://localhost:3001"
 
 const API = {
     login:userObj=>{
@@ -29,6 +29,20 @@ const API = {
             }
             return res.json()
           })
+    },
+    getIdByUserName: (token)=>{
+        return fetch(`${URL_PREFIX}/api/students/findId/:studentusername`, {
+            method: "get",
+            headers: {
+                "Authorization":`Bearer ${token}`
+            }.then(res=>{
+                if(!res.ok){
+                    throw new Error("invalid name")
+                }
+                return res.json();
+            })
+
+        })
     },
     teacherlogin:userObj=>{
         return fetch(`${URL_PREFIX}/api/teachers/login`,{
@@ -253,6 +267,21 @@ const API = {
                     }
                     return res.json()
                   })
+                },
+                sendCard:(token,cardObj)=>{
+                    return fetch(`${URL_PREFIX}/api/cards/send/:cardId/:reciverId`,{
+                        method:"POST",
+                        body:JSON.stringify(cardObj),
+                        headers:{
+                            "Content-Type":"application/json",
+                            "Authorization":`Bearer ${token}`
+                        }
+                    }).then(res=>{
+                        if(!res.ok){
+                         throw new Error("cannot create")
+                        }
+                        return res.json()
+                      })
                 },
       
 }
