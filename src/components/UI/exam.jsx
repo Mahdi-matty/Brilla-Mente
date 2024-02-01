@@ -10,8 +10,8 @@ export default function Exam (){
     const [cards, setCards] = useState([])
     const tokrn = localStorage.getItem('token')
     const [showexamDivStart, setShowexamDivStart] = useState(false);
-    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
-    // const URL_PREFIX = "http://localhost:3001"
+    // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+    const URL_PREFIX = "http://localhost:3001"
 
     // i should make route to sleect subject aor topic and then fetch the cards associated with that here 10 (also probably with difficulty)
    

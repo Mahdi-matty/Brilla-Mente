@@ -29,11 +29,13 @@ export default function TopictPart (){
     const [content, setContent] = useState('')
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [studentId, setStudentId] = useState('')
+    const [studentname, setStudentName] = useState('')
+    const [suggestions, setSuggestions] = useState([])
 
     
     const token = localStorage.getItem('token')
-    const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
-    // const URL_PREFIX = "http://localhost:3001"
+    // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+    const URL_PREFIX = "http://localhost:3001"
     useEffect(()=>{
         fetch(`${URL_PREFIX}/api/cards`,{
           headers:{
@@ -71,7 +73,7 @@ export default function TopictPart (){
         const cardObj = {
             title: title,
             content: content,
-            difficulty: difficulty
+            difficulty: difficulty,
         }
             API.createCard(token,cardObj).then(newCard=>{
               API.getCards(token).then(allCards=>{
@@ -86,37 +88,74 @@ export default function TopictPart (){
       const shareCard = id => {
         setShowSharePopup(!showSharePopup);
       }
-      const handleUsernameChange = async (e) => {
-        const input = e.target.value;
-        setUsername(input);
-        if (input.length === 0) {
-            setSuggestions([]);
-            return;
+  //     const handleUsernameChange = async (e) => {
+  //       e.preventDefault();
+  //       const input = e.target.value;
+  //       try {
+  //           const response = await fetch(`${URL_PREFIX}/api/students`);
+  //           const usernames = await response.json();
+  //           const matchingUser = usernames.find(user => user.username === input);
+  //           if (matchingUser) {
+  //             setStudentName(matchingUser)
+  //         } else {
+  //             setStudentName('');
+  //         }
+  //     } catch (error) {
+  //         console.log(error);
+  //     }
+  // };
+  
+  const handleUsernameSelect = async (event) => {
+    event.preventDefault();    
+    try {
+      const response = await fetch(`${URL_PREFIX}/api/students`, {
+        headers:{
+          Authorization:`Bearer ${token}`
         }
-        try {
-            const response = await fetch(`${URL_PREFIX}/api/students?prefix=${input}`);
-            const usernames = await response.json();
-            setSuggestions(usernames);
-            API.getIdByUserName(token).then(studentId=>{
-              setStudentId(studentId)
-            }).catch(error=>{
-              console.log(error)
-            })} catch (error) {
-            console.log(error);
-        }
-    };
+      });
+      const data= await response.json()
+      console.log(data)
+      const matchingUser = data.filter(user => user.username == studentname);
+      console.log(matchingUser)
+    setStudentId(matchingUser[0].id);
+    console.log(studentId)
+    } catch(error){
+      console.log(error)
+    }
+    
+};
 
-      const shareWithUserName = ()=> {
+      const shareWithUserName = async (e, card)=> {
         e.preventDefault();
-        const cardShare = this.closest('.cardInQuestion')
+        if (!studentId) {
+          console.error("Student ID not available yet.");
+          return;
+      }
+      console.log(studentId)
         const cardObj ={
-          title: cardShare.title,
-          content: cardShare.content,
-          difficulty: cardShare.difficulty
+          title: card.title,
+          content: card.content,
+          difficulty: card.difficulty,
         }
+       const receiverId = studentId
+       try {
+        const response = await fetch(`${URL_PREFIX}/api/cards/send/${card.id}/${receiverId}`, {
+          method: 'post',
+          body:JSON.stringify(cardObj),
+          headers: {
+            "Content-Type":"application/json",
+            "Authorization":`Bearer ${token}`
+        }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to share card');
+      } else {
+        console.log('success')
+      }}catch(error){
+        console.log(error)
+      }
+       }
 
-
-      } 
     return (
         <>
         <div>
@@ -129,25 +168,28 @@ export default function TopictPart (){
                     <button onClick={() => editeCard(card.id)}>Edit</button>
                     <button onClick={() => delCard(card.id)}>Delete</button>
                     <button className="cardShareIt" onClick={()=>shareCard(card.id)}>Share</button>
-                        {/* {showSharePopup && (
+                        {showSharePopup && (
                         <div className="share-popup">
-                          <WhatsappShareButton url={card.id}>
+                          {/* <WhatsappShareButton url={card.id}>
                             <WhatsappIcon size={32} round />
                           </WhatsappShareButton>
                           <EmailShareButton url={card.id}>
                             <EmailIcon size={32} round />
-                          </EmailShareButton>
-                          <form onSubmit={shareWithUserName}>
-                            <input                            name="username"
-                            onChange={handleUsernameChange}
+                          </EmailShareButton> */}
+                          <form onSubmit={(e)=>handleUsernameSelect(e)}>
+                            <input                            
+                            name="studentname"
+                            onChange={e=>setStudentName(e.target.value)}
                             type="text"
                             placeholder="username"
-                          /><ul className="userSuggestion"></ul>
-                           <button type="submit">Share</button>
+                          /><ul className="userSuggestion">
+                          </ul>
+                           <button type="submit">find</button>
                           </form>
+                          <button onClick={(e)=>shareWithUserName(e, card)}>share</button>
                           
                         </div>
-                      )} */}
+                      )}
                   </li>
                 ))}
             </ul>
@@ -175,9 +217,9 @@ export default function TopictPart (){
                 className="answerNewCard"
                 />
                 <select value={difficulty} onChange={e=>setDifficulty(e.target.value)}>
-                  <option value="low">Easy</option>
-                  <option value="med">medium</option>
-                  <option value="high">Hard</option>
+                  <option value="1">Easy</option>
+                  <option value="2">medium</option>
+                  <option value="3">Hard</option>
                 </select>
 
                 <button type="submit">Add new card</button>
