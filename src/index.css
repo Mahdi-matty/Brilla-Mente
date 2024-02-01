@@ -184,6 +184,9 @@ button {
   left: 50px;
   margin: 5px;
 }
+.pendingCards {
+ color: black;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
