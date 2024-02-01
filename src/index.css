@@ -187,6 +187,9 @@ button {
 .pendingCards {
  color: black;
 }
+.topicForAccept {
+  color: black;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

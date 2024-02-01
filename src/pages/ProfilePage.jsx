@@ -8,7 +8,9 @@ import { useState, useEffect } from 'react';
    // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
    const URL_PREFIX = "http://localhost:3001"
    const [pendingcards, setPendingCards] = useState([])
+   const [topic, setTopic] = useState([])
    const [showAcceptPopup, setShowAcceptPopup] = useState(false);
+   const [topicId, setTopicId] = useState('')
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token');
@@ -16,6 +18,17 @@ import { useState, useEffect } from 'react';
       setIsLoggedIn(true);
     }
   }, []);
+  useEffect(()=>{
+    fetch(`${URL_PREFIX}/api/topics`,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    }).then(res=>res.json()).then(data=>{
+      console.log('data', data)
+      setTopic(data)
+    })
+  },[])
+
   useEffect(()=>{
     fetch(`${URL_PREFIX}/api/cards/find-pending`,{
       headers:{
@@ -25,6 +38,7 @@ import { useState, useEffect } from 'react';
       console.log('data', data)
       setPendingCards(data)
       console.log(pendingcards)
+
     }).catch(error => console.log(error))
   },[token])
 
@@ -36,16 +50,17 @@ import { useState, useEffect } from 'react';
       </div>
     );
   }
-  const acceptCard = async(e, cardId, topicId)=>{
+  const acceptCard = async(e, cardId)=>{
     e.preventDefault();
     try {
-      const response = await fetch(`${URL_PREFIX}/api/cards/${cardId}/${topicId}`, {
+      const response = await fetch(`${URL_PREFIX}/api/cards/accept-card/${cardId}/${topicId}`, {
         method:"PUT",
       });
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(errorMessage || 'Something went wrong!');
       }
+      console.log('success')
   
     } catch(error){
       console.log(error)
@@ -93,12 +108,23 @@ import { useState, useEffect } from 'react';
                 <button onClick={()=>showPending()}><FaBell className="iconSize"/></button>
                 {showAcceptPopup && (
             <div>
+              <ul className='topicForAccept'>
+                {topic.map((topic)=>(
+                  <li key={topic.id}>
+                    <p>{topic.title} : {topic.id}</p>
+                  </li>
+                ))}
+              </ul>
             <p>pending Cards</p>
             <ul>
           {pendingcards.map((card)=>(
             <li key={card.id} className='pendingCards'>
               <p>{card.title}</p>
-              <button onClick={(e)=>acceptCard(e, card.id, card.topic)}>Accespt</button>
+              <input
+              name='topicId'
+              onChange={(e)=>setTopicId(e.target.value)}
+              placeholder='topicId'></input>
+              <button onClick={(e)=>acceptCard(e, card.id)}>Accespt</button>
             </li>
           ))}
           </ul>
