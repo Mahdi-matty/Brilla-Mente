@@ -10,6 +10,9 @@ export default function Exam (){
     const [cards, setCards] = useState([])
     const tokrn = localStorage.getItem('token')
     const [showexamDivStart, setShowexamDivStart] = useState(false);
+    const [showResault, setShowResault] = useState(false)
+    const [correctCard, setCorrectCards] = useState([]);
+    const [inCorrectCard, setInCorrectCards] = useState([]);
     // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
     const URL_PREFIX = "http://localhost:3001"
 
@@ -47,6 +50,7 @@ export default function Exam (){
       e.preventDefault();
       setShowexamDivStart(true)
       setIsAnswered(false)
+      setShowResault(false)
     }
     useEffect(() => {
       const interval = setInterval(() => {
@@ -83,6 +87,12 @@ export default function Exam (){
             setTimer(10);
           }
         }, [timer]);
+        const addCorrect = (NewCard)=>{
+          setCorrectCards(prevCorrect=> [...prevCorrect, NewCard])
+        }
+        const addInCorrect = (NewCard)=>{
+          setInCorrectCards(prevInCorrect=> [...prevInCorrect, NewCard])
+        }
       
       //   useEffect(() => {
       //     if (!isAnswered) {
@@ -92,6 +102,12 @@ export default function Exam (){
       //       setTimer(10);
       //     }
       //   }, [timer, isAnswered])
+      const finishExam = ()=>{
+        console.log(correctCard)
+        console.log(inCorrectCard)
+        setShowexamDivStart(false)
+        setShowResault(true)
+      }
         return (
           <>
             <div className="examDiv">
@@ -122,16 +138,47 @@ export default function Exam (){
                 {cards.map((card, index) => (
                       <li key={card.id}>
                       <p>{questionIndex === index ? card.title : ''}</p>
-                      {isAnswered && questionIndex === index && <p>{card.content}</p>}
+                      {isAnswered && questionIndex === index && (
+                      <div>
+                        <p>{card.content}</p>
+                        <button onClick={() => addCorrect(card)}>Correct</button>
+                        <button onClick={() => addInCorrect(card)}>Incorrect</button>
+                      </div>
+                    )}
+                      
                   </li>
               ))}
               <button onClick={nextQuestion}>Next</button>
           </ul>
 
           <p>Time left: {timer} seconds</p>
+          <button onClick={finishExam}> Finish</button>
       </div>
             )}
-            
+            {showResault && (
+              <div>
+                <ul> Correct :
+                  {correctCard.map((card)=>(
+                    <li key={card.id}>
+                      <p>{card.title}</p>
+                      <p>{card.content}</p>
+                    </li>
+                  ))
+                  }
+                </ul>
+                <ul> Incorrect :
+                  {inCorrectCard.map((card)=> (
+                    <li key={card.id}>
+                      <p>{card.title}</p>
+                      <p>{card.content}</p>
+                    </li>
+                  ))}
+                </ul>
+            </div>
+            )
+               
+            }
+           
               
            
           </>
