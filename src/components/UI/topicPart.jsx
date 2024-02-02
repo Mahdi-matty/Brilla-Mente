@@ -170,12 +170,12 @@ export default function TopictPart (){
                     <button className="cardShareIt" onClick={()=>shareCard(card.id)}>Share</button>
                         {showSharePopup && (
                         <div className="share-popup">
-                          {/* <WhatsappShareButton url={card.id}>
+                          <WhatsappShareButton url={card.id}>
                             <WhatsappIcon size={32} round />
                           </WhatsappShareButton>
                           <EmailShareButton url={card.id}>
                             <EmailIcon size={32} round />
-                          </EmailShareButton> */}
+                          </EmailShareButton>
                           <form onSubmit={(e)=>handleUsernameSelect(e)}>
                             <input                            
                             name="studentname"

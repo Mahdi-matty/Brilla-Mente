@@ -1,5 +1,5 @@
 // cards should be fetched here and based on the subject shown to people 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react"
 
 export default function SubjectPart (){
@@ -8,8 +8,10 @@ export default function SubjectPart (){
     const token = localStorage.getItem('token')
     // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
     const URL_PREFIX = "http://localhost:3001"
+    const { id } = useParams();
+    console.log(id)
     useEffect(()=>{
-        fetch(`${URL_PREFIX}/api/topics`,{
+        fetch(`${URL_PREFIX}/api/subjects/find-topics/${id}`,{
           headers:{
             Authorization:`Bearer ${token}`
           }

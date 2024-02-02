@@ -19,7 +19,7 @@ import { useState, useEffect } from 'react';
     }
   }, []);
   useEffect(()=>{
-    fetch(`${URL_PREFIX}/api/topics`,{
+    fetch(`${URL_PREFIX}/api/topics/student-topics`,{
       headers:{
         Authorization:`Bearer ${token}`
       }
