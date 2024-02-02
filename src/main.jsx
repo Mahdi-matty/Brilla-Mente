@@ -14,6 +14,7 @@ import SubjectPart from './components/UI/subjectPart.jsx';
 import TopictPart from './components/UI/topicPart.jsx';
 import TeacherLoging from './pages/TeacherLogin.jsx';
 import TeacherSignup from './components/teacherui/teachsignup.jsx';
+import CardPart from './components/UI/cardPart.jsx';
 
 const router = createBrowserRouter([
   {
@@ -60,7 +61,11 @@ const router = createBrowserRouter([
       {
         path: '/topic/:id',
         element: <TopictPart />,
-      },        
+      },  
+      {
+        path: '/topic/:id/cards/:id',
+        element: <CardPart />,
+      },              
     ],
   }
 ]);

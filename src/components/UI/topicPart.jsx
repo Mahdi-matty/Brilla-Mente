@@ -1,5 +1,5 @@
 import { useState, useEffect, createElement } from "react"
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -32,12 +32,12 @@ export default function TopictPart (){
     const [studentname, setStudentName] = useState('')
     const [suggestions, setSuggestions] = useState([])
 
-    
+    const { id } = useParams();
     const token = localStorage.getItem('token')
     // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
     const URL_PREFIX = "http://localhost:3001"
     useEffect(()=>{
-        fetch(`${URL_PREFIX}/api/cards`,{
+        fetch(`${URL_PREFIX}/api/cards/find-by-topic/${id}`,{
           headers:{
             Authorization:`Bearer ${token}`
           }
@@ -163,16 +163,16 @@ export default function TopictPart (){
             <ul>
             {cards.map((card)=>(
                   <li className='cardInQuestion' key={card.id}>
-                    <p>{card.title}</p>
+                    <Link to={`cards/${card.id}`} >{card.title} </Link>
                     <p>{card.content}</p>
                     <button onClick={() => editeCard(card.id)}>Edit</button>
                     <button onClick={() => delCard(card.id)}>Delete</button>
                     <button className="cardShareIt" onClick={()=>shareCard(card.id)}>Share</button>
                         {showSharePopup && (
                         <div className="share-popup">
-                          <WhatsappShareButton url={card.id}>
-                            <WhatsappIcon size={32} round />
-                          </WhatsappShareButton>
+                          <TelegramShareButton url={`http://localhost:3000/topic/${id}/cards/${card.id}`}>
+                            <TelegramIcon size={32} round />
+                          </TelegramShareButton>
                           <EmailShareButton url={card.id}>
                             <EmailIcon size={32} round />
                           </EmailShareButton>
