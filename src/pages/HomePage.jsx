@@ -9,7 +9,11 @@ function HomePage() {
   const [userName, setuserName] = useState('');
   const [Password, setPassword] = useState('');
   const [token, setToken] = useState("");
+  const [githubusername, setGithubUserName] = useState('');
+  const [githubpassword, setGithubPassword] = useState('');
+  const [githubemail, setGithubEmail] = useState('');
  const [loggedin, setIsLoggedIn] = useState(false)
+ const URL_PREFIX = 'http://localhost:3001'
   useEffect(()=>{
     const savedToken = localStorage.getItem("token");
     if(savedToken){
@@ -33,29 +37,95 @@ useEffect(()=>{
 
   if (codeParams && (localStorage.getItem('AccessToken') === null)){
     async function getAccessToken(){
-      await fetch('http://localhost:3001/getAccessToken?code='+ codeParams, {
+      await fetch(`${URL_PREFIX}/getAccessToken?code=1`+ codeParams, {
         method: 'GET'
       }).then((Response)=>{
         return Response.json()
       }).then((data)=>{
         if (data.access_token){
           localStorage.setItem('AccessToken', data.access_token)
+          console.log(data.access_token)
         }
       })
     } getAccessToken();
   }
 }, [])
+
+
+useEffect(() => {
+  console.log(githubemail);
+  console.log(githubpassword);
+  if (githubemail&& githubpassword&& githubusername){
+      githubUserProcess()
+  }
+}, [githubemail, githubpassword, githubusername]);
+
+
+
 async function getUserData(){
- await fetch('http://localhost:3001/getUserData', {
+ await fetch(`${URL_PREFIX}/getUserData`, {
   method: 'GET',
  headers: {
   'Authorization': 'Bearer ' + localStorage.getItem('AccessToken')
  }}).then((response)=>{
   return response.json();
  }).then((data)=>{
-  console.log(data)
+  console.log(data.login)
+  setGithubUserName(data.login)
+  console.log(githubusername)
+  setGithubEmail(`${data.login}@github.com`)
+  console.log(githubemail)
+  console.log(data.id)
+  setGithubPassword(`${data.id}`)
+  console.log(githubpassword)
  })
 }
+
+const githubUserProcess = async ()=>{
+ try {
+  const response = await fetch(`${URL_PREFIX}/api/students`)
+  const data= await response.json()
+  console.log(data)
+  const matchingUser = data.filter(user => user.username === githubusername);
+  if (matchingUser.ok){
+    const userObj= {
+      githubusername,
+      githubpassword
+    }
+    API.login({
+      username:userObj.githubusername,
+      password:userObj.githubpassword,
+  }).then(data=>{
+      console.log(data);
+      setIsLoggedIn(true);
+      setToken(data.token);
+      localStorage.setItem("token",data.token)
+      navigate('/profile')
+}).catch(err=>{
+    console.log(err);
+})
+  }else {
+    const userObj ={
+      githubusername,
+      githubpassword,
+      githubemail
+    }
+    API.signup({
+      username : userObj.githubusername,
+      password : userObj.githubpassword,
+      email : userObj.githubemail
+    }).then((data)=>{
+      setIsLoggedIn(true);
+      setToken(data.token);
+      localStorage.setItem("token",data.token)
+      navigate('/profile')
+    }).catch(err=>{
+      console.log(err);
+  })
+  }
+}catch(error){
+console.log(error)
+}}
 
   const handleFormSubmit = (e)=> {
     e.preventDefault();
