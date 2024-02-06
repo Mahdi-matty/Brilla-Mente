@@ -87,7 +87,8 @@ const githubUserProcess = async ()=>{
   const data= await response.json()
   console.log(data)
   const matchingUser = data.filter(user => user.username === githubusername);
-  if (matchingUser.ok){
+  console.log(matchingUser[0])
+  if (matchingUser[0]){
     const userObj= {
       githubusername,
       githubpassword
