@@ -19,6 +19,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -30,6 +31,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
 .loginDivCont{
   display: flex;
   flex-direction: column;
@@ -37,11 +39,13 @@ body {
   justify-content: center;
   height: 100vh;
 }
+
 .teacherLog {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 nav {
   position: fixed;
   width: 100%;
@@ -50,24 +54,28 @@ nav {
   background-color: #74a0ff;
   opacity: 0.5;
 }
+
 .nav-link {
   margin: 5px 15px;
   color: black;
   size: 25px;
- }
- .form {
+}
+
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
   margin-top: 20px;
- }
- input {
+}
+
+input {
   width: 25vw;
   height: 25px;
   margin-bottom: 10px;
- }
- .sideNav {
+}
+
+.sideNav {
   position: fixed;
   left: -30%; 
   top: 0;
@@ -77,9 +85,11 @@ nav {
   padding: 20px;
   transition: left 0.3s; 
 }
+
 .sideNav:hover {
   left: 0; 
 }
+
 .sideNav ul {
   list-style: none;
   padding: 0;
@@ -95,25 +105,31 @@ nav {
   display: flex;
   align-items: center;
 }
+
 .sideNav Link:hover {
   background-color: #555;
   padding: 10px;
   border-radius: 5px;
 }
+
 .iconSize {
   font-size: 30px;
   margin-top: 25px;
 }
+
 .navSpan {
   display: none;
 }
+
 .sideNav li:hover .navSpan {
   display: inline;
 }
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -139,10 +155,12 @@ button {
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
 .newSubjectAdd {
   display: flex;
   justify-content: center;
@@ -175,18 +193,22 @@ button {
   padding: 10px;
   cursor: pointer;
 }
+
 .examDiv {
   display: flex;
   width: 100vh;
 }
+
 .selectExamSubject .selectExamDifficulty {
   width: 25px;
   left: 50px;
   margin: 5px;
 }
+
 .pendingCards {
  color: black;
 }
+
 .topicForAccept {
   color: black;
 }
