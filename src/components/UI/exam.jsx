@@ -128,7 +128,7 @@ export default function Exam (){
             <option value="2">medium</option>
             <option value="3">hard</option>
           </select>
-          <button type="submit">submit</button>
+          <button type="submit" className="examSubmitBtn">submit</button>
         </form>          
       </div>
       {showexamDivStart && (

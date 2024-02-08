@@ -162,11 +162,11 @@ export default function TopictPart (){
 
   return (
     <>
-     <div>
+     <div className="topicPartCardsDev">
         <h2>Topics</h2>
         <ul>
           {cards.map((card)=>(
-            <li className='cardInQuestion' key={card.id}>
+            <li className={`cardInQuestion cardDifficulty${card.difficulty}`} key={card.id}>
               <Link to={`cards/${card.id}`} >{card.title} </Link>
               <p>{card.content}</p>
               <button onClick={() => editeCard(card.id)}>Edit</button>

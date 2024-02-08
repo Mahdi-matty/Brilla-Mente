@@ -24,9 +24,8 @@ export default function cardPart(){
 
   return (
     <>
-      <div>
-        {card.title}
-        <hr />
+      <div className="cardPartDev">
+      <h2 style={{ fontSize: '24px', padding: '5px' }}>{card.title}</h2>
         {card.content}
       </div>
     </>

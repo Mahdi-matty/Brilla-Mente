@@ -196,8 +196,15 @@ button {
 }
 
 .examDiv {
-  display: flex;
+  margin-top: 80px;
+  display: block;
+  align-items: center;
+  justify-content: center;
   width: 100vh;
+}
+.examSubmitBtn {
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
 .selectExamSubject .selectExamDifficulty {
@@ -212,6 +219,37 @@ button {
 
 .topicForAccept {
   color: black;
+}
+.topicPartCardsDev {
+  padding-top: 60px;
+}
+
+.cardDifficulty1 {
+  padding-top: 10px;
+  border: 1px dashed;
+  border-color: green;
+}
+
+.cardDifficulty2 {
+  padding-top: 10px;
+  border: 1px dashed;
+  border-color: yellow;
+}
+
+.cardDifficulty3 {
+  padding-top: 10px;
+  border: 1px dashed;
+  border-color: red;
+}
+.cardPartDev {
+  margin-top: 150px;
+  margin-left: 30%;
+  padding-top: 70px;
+  align-items: center;
+  border: 1px dashed;
+  background-color: paleturquoise;
+  height: 250px;
+  width: 550px;
 }
 
 @media (prefers-color-scheme: light) {

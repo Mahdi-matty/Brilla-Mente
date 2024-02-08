@@ -1,6 +1,6 @@
 import { Outlet  } from 'react-router-dom';
 import Nav from './components/nav'
-import './App.css'
+import './index.css'
 function App() {
   return (
     <>

@@ -15,6 +15,7 @@ import TopictPart from './components/UI/topicPart.jsx';
 import TeacherLoging from './pages/TeacherLogin.jsx';
 import TeacherSignup from './components/teacherui/teachsignup.jsx';
 import CardPart from './components/UI/cardPart.jsx';
+import AboutUs from './pages/AboutUs.jsx'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <Signup />,
+      },
+      {
+        path: '/about',
+        element: <AboutUs />,
       },
       {
         path: '/teacherlogin',
