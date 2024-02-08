@@ -9,7 +9,7 @@ const Signup = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const generateAuthCode = () => {
-        return Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit code
+    return Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit code
   };
 
   const handleFormSubmit = async (e) => {
@@ -22,41 +22,41 @@ const Signup = (props) => {
   }
 
   return (
-    <footer>
+    <section className='signUpForm'>
       <div className='githubRes'>
-      <form className="form" onSubmit={handleFormSubmit}>
-        <input
-          value={username}
-          name="username"
-          onChange={e=>setUserName(e.target.value)}
-          type="text"
-          placeholder="username"
-        />
-        <input
-          value={email}
-          name="email"
-          onChange={e=> setEmail(e.target.value)}
-          type="text"
-          placeholder="Email"
-        />
-        <input
-          value={password}
-          name="password"
-          onChange={e=> setPassword(e.target.value)}
-          type="text"
-          placeholder="password"
-        />
-        <button type="submit">
-          Submit
-        </button>
-      </form>
-      {errorMessage && (
-        <div>
-          <p className="error-text">{errorMessage}</p>
-        </div>
-      )}
-        </div>
-    </footer>
+        <form className="form" onSubmit={handleFormSubmit}>
+          <input
+            value={username}
+            name="username"
+            onChange={e=>setUserName(e.target.value)}
+            type="text"
+            placeholder="username"
+          />
+          <input
+            value={email}
+            name="email"
+            onChange={e=> setEmail(e.target.value)}
+            type="text"
+            placeholder="Email"
+          />
+          <input
+            value={password}
+            name="password"
+            onChange={e=> setPassword(e.target.value)}
+            type="text"
+            placeholder="password"
+          />
+          <button type="submit">
+            Submit
+          </button>
+        </form>
+        {errorMessage && (
+          <div>
+            <p className="error-text">{errorMessage}</p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 

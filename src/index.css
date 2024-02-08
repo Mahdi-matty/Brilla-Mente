@@ -2,16 +2,14 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+#root {
+  width: 100%;
+  text-align: center;
 }
 
 a {
@@ -28,8 +26,11 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+}
+
+.loginPage{
+  width: 100%;
+  height: auto;
 }
 
 .loginDivCont{
@@ -77,10 +78,10 @@ input {
 
 .sideNav {
   position: fixed;
-  left: -30%; 
+  left: -130px; 
   top: 0;
   height: 100%;
-  width: 30%;
+  width: 130px;
   background-color: #333;
   padding: 20px;
   transition: left 0.3s; 

@@ -170,43 +170,45 @@ function HomePage() {
 
   return (
     <>
-     <div className="container text-center loginDivCont">
-      <h1>
-       login!
-      </h1>
-      <form className="formLogin" onSubmit={e=>handleFormSubmit(e, { userName, Password })}>
-        <input
-          value={userName}
-          name="userName"
-          onChange={e=> setuserName(e.target.value)}
-          type="text"
-          placeholder="userName"
-        />
-        <input
-          value={Password}
-          name="password"
-          onChange={e=> setPassword(e.target.value)}
-          type="password"
-          placeholder="password"
-        />
-        <button type="submit">
-          Login
-        </button>
-      </form>
-      <h2>Or login with Github</h2>
-      <FaGithub onClick={loginWithgithub}/>
-      <button onClick={getUserData}>get user data</button>
-      <button onClick={toggleSignup} className="badge bg-primary rounded-pill">
-        Signup
-      </button>
-      {showSignup && <Signup subHandle={handleSignup} />}
-    </div>
-    <div className='teacherLog'>
-      <Link to='/teacherlogin'>
-        <button>
-          Teachers
-          </button></Link>
-    </div>
+      <div className='loginPage'>
+        <div className="loginDivCont">
+          <h1>
+          login!
+          </h1>
+          <form className="formLogin" onSubmit={e=>handleFormSubmit(e, { userName, Password })}>
+            <input
+              value={userName}
+              name="userName"
+              onChange={e=> setuserName(e.target.value)}
+              type="text"
+              placeholder="userName"
+            />
+            <input
+              value={Password}
+              name="password"
+              onChange={e=> setPassword(e.target.value)}
+              type="password"
+              placeholder="password"
+            />
+            <button type="submit">
+              Login
+            </button>
+          </form>
+          <h2>Or login with Github</h2>
+          <FaGithub onClick={loginWithgithub}/>
+          <button onClick={getUserData}>get user data</button>
+          <button onClick={toggleSignup} className="badge bg-primary rounded-pill">
+            Signup
+          </button>
+          {showSignup && <Signup subHandle={handleSignup} />}
+        </div>
+        <div className='teacherLog'>
+          <Link to='/teacherlogin'>
+            <button>
+              Teachers
+            </button></Link>
+        </div>
+      </div>     
     </>   
   );
 }

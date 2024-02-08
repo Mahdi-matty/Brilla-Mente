@@ -220,7 +220,7 @@ export default function TopictPart (){
           placeholder="Enter your content"
           className="answerNewCard"
           />
-          <select value={difficulty} onChange={e=>setDifficulty(e.target.value)}>
+          <select value={difficulty} onChange={e=>setDifficulty(e.target.value)} multiple>
             <option value="1">Easy</option>
             <option value="2">medium</option>
             <option value="3">Hard</option>
