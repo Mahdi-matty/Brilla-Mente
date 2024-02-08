@@ -2,17 +2,15 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 const Signup = (props) => {
-    const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [username, setUserName] = useState('');
   const [password, setPassword]=useState('');
   const [authCode, setAuthCode] = useState(null);
-  
   const [errorMessage, setErrorMessage] = useState('');
 
   const generateAuthCode = () => {
         return Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit code
-      };
-  
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
