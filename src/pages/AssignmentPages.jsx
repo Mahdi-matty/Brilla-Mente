@@ -34,13 +34,12 @@ function AssignmentPage(){
     setShowSharePopup(!showSharePopup);
   };
 
-
-    return (
-      <div>
-        <h1>My React App</h1>
-        <YoutubeEmbed url={youtubeUrl} />
-        <button onClick={handleShareButtonClick}>Share</button>
-        {showSharePopup && (
+  return (
+    <div>
+      <h1>My React App</h1>
+      <YoutubeEmbed url={youtubeUrl} />
+      <button onClick={handleShareButtonClick}>Share</button>
+      {showSharePopup && (
         <div className="share-popup">
           <WhatsappShareButton url={sharebale}>
             <WhatsappIcon size={32} round />
