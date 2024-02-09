@@ -83,6 +83,7 @@ export default function SubjectPart (){
         type='text'
         value={newtopic}
         onChange={e=> setNewTopic(e.target.value)}></input>
+        <button type="submit">Submit</button>
       </form>
     </div>
     </>

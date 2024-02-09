@@ -203,8 +203,8 @@ function HomePage() {
             </form>
             <div className='gitHubOption'>
               <h2>Or login with Github</h2>
-              <img src='src\assets\github.png' onClick={loginWithgithub} className='gitHubLogo'/>
-              <button onClick={getUserData}>Get User Data</button>
+              <button onClick={loginWithgithub}>Get User Data</button>
+              <img src='src\assets\github.png' onClick={getUserData} className='gitHubLogo'/>
             </div>            
           </div>
           <button onClick={toggleSignup} className="signUpButton">

@@ -1,6 +1,6 @@
 export default function Nav({ links }) {
   return (
-    <nav className="navbar">
+    <nav className="navbarTop">
         <ul className="">
           {links.map((link) => link)}
         </ul>

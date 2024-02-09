@@ -76,7 +76,7 @@ export default function Exam (){
   //   }, [questionIndex]);
   const nextQuestion = () => {
     setIsAnswered(false);
-    setTimer(10)
+    setTimer(5)
     setQuestionIndex((question)=> question+1)
   }
   
@@ -93,24 +93,28 @@ export default function Exam (){
   const addInCorrect = (NewCard)=>{
     setInCorrectCards(prevInCorrect=> [...prevInCorrect, NewCard])
   }
-  
-  //   useEffect(() => {
-  //     if (!isAnswered) {
-  //       setIsAnswered(true);
-  //       setQuestionIndex((prevQuestion) => prevQuestion + 1);
-  
-  //       setTimer(10);
-  //     }
-  //   }, [timer, isAnswered])
+
   const finishExam = ()=>{
     console.log(correctCard)
     console.log(inCorrectCard)
     setShowexamDivStart(false)
     setShowResault(true)
   }
+  const resetExam = () => {
+    setQuestionIndex(-1);
+    setTimer(5);
+    setIsAnswered(false);
+    setSelectedTopic("");
+    setDifficulty("");
+    setCorrectCards([]);
+    setInCorrectCards([]);
+    setShowResault(false);
+    setShowexamDivStart(true);
+  };
   return (
     <>
     <SideNav />
+    {!showexamDivStart && !showResault && (
       <div className="examDiv">
         <p>Select Topic:</p>
         <form onSubmit={showExamDiv}> 
@@ -130,8 +134,9 @@ export default function Exam (){
             <option value="3">hard</option>
           </select>
           <button type="submit" className="examSubmitBtn">submit</button>
-        </form>          
+        </form>         
       </div>
+       )} 
       {showexamDivStart && (
         <div className="examDivStart">
           <ul>
@@ -172,6 +177,7 @@ export default function Exam (){
               </li>
             ))}
           </ul>
+          <button onClick={resetExam}>Retry Exam</button>
         </div>
       )}        
     </>

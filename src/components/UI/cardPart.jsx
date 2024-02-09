@@ -28,7 +28,7 @@ export default function cardPart(){
       <SideNav />
       <div className="cardPartDev">
       <h2 style={{ fontSize: '24px', padding: '5px' }}>{card.title}</h2>
-        {card.content}
+        <p>{card.content}</p>
       </div>
     </>
   )
