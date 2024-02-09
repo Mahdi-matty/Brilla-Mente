@@ -1,0 +1,65 @@
+.logoImage{
+    border-radius: 50%;
+}
+
+.teacherLog{
+    display: none;
+}
+
+.formLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 30px;
+    border-right: solid 3px black;
+    padding-right: 30px;
+}
+
+input{
+    margin: 10px;
+}
+
+.gitHubLogo{
+    height: 60px;
+    width: 60px;
+    margin: 15px;
+}
+
+.loginOptions{
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid orange;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.gitHubOption{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUpButton{
+    margin: 20px;
+}
+
+@media (max-width: 767px) {
+    /* CSS styles for mobile devices */
+    /* Add your styles here */
+    h1{
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .loginOptions{
+        justify-content: center;
+    }
+    
+    .formLogin{
+        margin: 10px;
+        border-right:none;
+        padding: 10px;
+    }
+}

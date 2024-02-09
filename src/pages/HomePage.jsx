@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import API from '../utils/API'
 import Signup from '../components/UI/signup';
 import { FaGithub } from 'react-icons/fa';
+import '../css/homePage.css';
+
 function HomePage() {
   const navigate = useNavigate();
   const [showSignup, setShowSignup] = useState(false);
@@ -82,54 +84,55 @@ function HomePage() {
   }
 
   const githubUserProcess = async ()=>{
-  try {
-    const response = await fetch(`${URL_PREFIX}/api/students`)
-    const data= await response.json()
-    console.log(data)
-    const matchingUser = data.filter(user => user.username === githubusername);
-    console.log(matchingUser[0])
-    if (matchingUser[0]){
-      const userObj= {
-        githubusername,
-        githubpassword
-      }
-      API.login({
-        username:userObj.githubusername,
-        password:userObj.githubpassword,
-      }).then(data=>{
-        console.log(data);
-        setIsLoggedIn(true);
-        setToken(data.token);
-        localStorage.setItem("token",data.token)
-        navigate('/profile')
-      }).catch(err=>{
-      console.log(err);
-      })
-    }else {
-      const userObj ={
-        githubusername,
-        githubpassword,
-        githubemail
-      }
-      API.signup({
-        username : userObj.githubusername,
-        password : userObj.githubpassword,
-        email : userObj.githubemail
-      }).then((data)=>{
-        setIsLoggedIn(true);
-        setToken(data.token);
-        localStorage.setItem("token",data.token)
-        navigate('/profile')
-      }).catch(err=>{
+    try {
+      const response = await fetch(`${URL_PREFIX}/api/students`)
+      const data= await response.json()
+      console.log(data)
+      const matchingUser = data.filter(user => user.username === githubusername);
+      console.log(matchingUser[0])
+      if (matchingUser[0]){
+        const userObj= {
+          githubusername,
+          githubpassword
+        }
+        API.login({
+          username:userObj.githubusername,
+          password:userObj.githubpassword,
+        }).then(data=>{
+          console.log(data);
+          setIsLoggedIn(true);
+          setToken(data.token);
+          localStorage.setItem("token",data.token)
+          navigate('/profile')
+        }).catch(err=>{
         console.log(err);
-      })
+        })
+      }else {
+        const userObj ={
+          githubusername,
+          githubpassword,
+          githubemail
+        }
+        API.signup({
+          username : userObj.githubusername,
+          password : userObj.githubpassword,
+          email : userObj.githubemail
+        }).then((data)=>{
+          setIsLoggedIn(true);
+          setToken(data.token);
+          localStorage.setItem("token",data.token)
+          navigate('/profile')
+        }).catch(err=>{
+          console.log(err);
+        })
+      }
+    }catch(error){
+    console.log(error)
     }
-  }catch(error){
-   console.log(error)
-  }}
+  }
 
-    const handleFormSubmit = (e)=> {
-      e.preventDefault();
+  const handleFormSubmit = (e)=> {
+    e.preventDefault();
     const userObj = {
       userName,
       Password
@@ -172,32 +175,37 @@ function HomePage() {
     <>
       <div className='loginPage'>
         <div className="loginDivCont">
+          <img src="src\assets\Logo.png" alt="Logo" className='logoImage'/>
           <h1>
-          login!
+          Welcome to Brilla Mente!
           </h1>
-          <form className="formLogin" onSubmit={e=>handleFormSubmit(e, { userName, Password })}>
-            <input
-              value={userName}
-              name="userName"
-              onChange={e=> setuserName(e.target.value)}
-              type="text"
-              placeholder="userName"
-            />
-            <input
-              value={Password}
-              name="password"
-              onChange={e=> setPassword(e.target.value)}
-              type="password"
-              placeholder="password"
-            />
-            <button type="submit">
-              Login
-            </button>
-          </form>
-          <h2>Or login with Github</h2>
-          <FaGithub onClick={loginWithgithub}/>
-          <button onClick={getUserData}>get user data</button>
-          <button onClick={toggleSignup} className="badge bg-primary rounded-pill">
+          <div className='loginOptions'>
+            <form className="formLogin" onSubmit={e=>handleFormSubmit(e, { userName, Password })}>
+              <input
+                value={userName}
+                name="userName"
+                onChange={e=> setuserName(e.target.value)}
+                type="text"
+                placeholder="userName"
+              />
+              <input
+                value={Password}
+                name="password"
+                onChange={e=> setPassword(e.target.value)}
+                type="password"
+                placeholder="password"
+              />
+              <button type="submit">
+                Login
+              </button>
+            </form>
+            <div className='gitHubOption'>
+              <h2>Or login with Github</h2>
+              <img src='src\assets\github.png' onClick={loginWithgithub} className='gitHubLogo'/>
+              <button onClick={getUserData}>Get User Data</button>
+            </div>            
+          </div>
+          <button onClick={toggleSignup} className="signUpButton">
             Signup
           </button>
           {showSignup && <Signup subHandle={handleSignup} />}
