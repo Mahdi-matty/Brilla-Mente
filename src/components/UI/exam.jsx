@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-
+import SideNav from '../sidenav'
 export default function Exam (){
   const [questionIndex, setQuestionIndex] = useState(-1);
   const [timer, setTimer] = useState(10);
@@ -110,6 +110,7 @@ export default function Exam (){
   }
   return (
     <>
+    <SideNav />
       <div className="examDiv">
         <p>Select Topic:</p>
         <form onSubmit={showExamDiv}> 

@@ -9,7 +9,7 @@ export default function Nav() {
   return (
     <Navbar className="navbarNew"
       links={[
-        <Link key={1} className="nav-link text-light newNavHead" to="/">
+        <Link key={1} className="nav-link text-light newNavHead" to="/" style={{display: 'none'}}>
           Home
         </Link>,
         <Link key={2} className="nav-link text-light newNavHead" to="/about">

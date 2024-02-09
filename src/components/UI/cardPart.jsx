@@ -1,6 +1,7 @@
 import { useState, useEffect, createElement } from "react"
 import API from "../../utils/API";
 import { useParams } from "react-router-dom";
+import SideNav from "../sidenav";
 
 export default function cardPart(){
   const [card, setCard] = useState('')
@@ -24,6 +25,7 @@ export default function cardPart(){
 
   return (
     <>
+      <SideNav />
       <div className="cardPartDev">
       <h2 style={{ fontSize: '24px', padding: '5px' }}>{card.title}</h2>
         {card.content}

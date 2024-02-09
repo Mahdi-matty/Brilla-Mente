@@ -210,6 +210,7 @@ button {
 .examDiv select {
   width: 100%;
   padding: 8px;
+  margin-left: 60px;
   margin-bottom: 10px;
 }
 .examSubmitBtn {
@@ -260,6 +261,12 @@ button {
   background-color: paleturquoise;
   height: 250px;
   width: 550px;
+}
+.notificationBtnStart {
+ background-color: #333;
+}
+.notBellIcon {
+  color: rgba(255, 255, 255, 0.448);
 }
 
 @media (prefers-color-scheme: light) {
