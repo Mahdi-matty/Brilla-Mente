@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import Navbar from './UI/Navbar'
+import { useState } from 'react';
 
 export default function Nav() {
+  const [loggedin, setIsLoggedIn] = useState(false)
+  const token = localStorage.getItem('token')
+  
   return (
     <Navbar className="navbarNew"
       links={[

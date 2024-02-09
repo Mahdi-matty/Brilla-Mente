@@ -153,6 +153,7 @@ export default function TopictPart (){
       if (!response.ok) {
         throw new Error('Failed to share card');
       } else {
+        window.alert("success")
       console.log('success')
       }
     }catch(error){
