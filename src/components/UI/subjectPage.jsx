@@ -1,6 +1,7 @@
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import API from '../../utils/API'
+import SideNav from "../sidenav";
 
 function SubjectPage(props){
   const [subjects, setSubjects] = useState([]);
@@ -77,7 +78,9 @@ function SubjectPage(props){
   }
     
   return (
-    <div>
+    <>
+    <SideNav />
+     <div>
       <h2>Subjects</h2>
       {loading ? (
         <p>Loading...</p>
@@ -104,6 +107,8 @@ function SubjectPage(props){
         <button type='submit'>Submit</button>
       </form>    
     </div>
+    </>
+   
   )
 }
 

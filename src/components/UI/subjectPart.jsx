@@ -1,6 +1,7 @@
 // cards should be fetched here and based on the subject shown to people 
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react"
+import SideNav from "../sidenav";
 
 export default function SubjectPart (){
   const [topics, setTopic] = useState([])
@@ -62,7 +63,9 @@ export default function SubjectPart (){
   }
 
   return (
-    <div>
+    <>
+    <SideNav />
+      <div>
       <h2>Topics</h2>
       <ul>
         {topics.map((topic)=>(
@@ -82,5 +85,7 @@ export default function SubjectPart (){
         onChange={e=> setNewTopic(e.target.value)}></input>
       </form>
     </div>
+    </>
+  
   )
 }

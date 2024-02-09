@@ -21,6 +21,7 @@ import {
   WhatsappIcon,
 } from "react-share";
 import API from "../../utils/API";
+import SideNav from '../sidenav'
 
 export default function TopictPart (){
   const [cards, setCard] = useState([])
@@ -153,6 +154,7 @@ export default function TopictPart (){
       if (!response.ok) {
         throw new Error('Failed to share card');
       } else {
+        window.alert("success")
       console.log('success')
       }
     }catch(error){
@@ -162,6 +164,7 @@ export default function TopictPart (){
 
   return (
     <>
+    <SideNav />
      <div className="topicPartCardsDev">
         <h2>Topics</h2>
         <ul>

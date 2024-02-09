@@ -209,6 +209,17 @@ button {
   justify-content: center;
   width: 100vh;
 }
+.examDiv p {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.examDiv select {
+  width: 100%;
+  padding: 8px;
+  margin-left: 60px;
+  margin-bottom: 10px;
+}
 .examSubmitBtn {
   margin-left: 15px;
   margin-top: 10px;
@@ -257,6 +268,12 @@ button {
   background-color: paleturquoise;
   height: 250px;
   width: 550px;
+}
+.notificationBtnStart {
+ background-color: #333;
+}
+.notBellIcon {
+  color: rgba(255, 255, 255, 0.448);
 }
 
 ul {
