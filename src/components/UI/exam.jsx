@@ -13,8 +13,8 @@ export default function Exam (){
   const [showResault, setShowResault] = useState(false)
   const [correctCard, setCorrectCards] = useState([]);
   const [inCorrectCard, setInCorrectCards] = useState([]);
-  // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
-  const URL_PREFIX = "http://localhost:3001"
+  const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+  // const URL_PREFIX = "http://localhost:3001"
 
   // i should make route to sleect subject aor topic and then fetch the cards associated with that here 10 (also probably with difficulty)
   useEffect(()=>{
@@ -109,7 +109,7 @@ export default function Exam (){
     setCorrectCards([]);
     setInCorrectCards([]);
     setShowResault(false);
-    setShowexamDivStart(true);
+    setShowexamDivStart(false);
   };
   return (
     <>
@@ -177,7 +177,7 @@ export default function Exam (){
               </li>
             ))}
           </ul>
-          <button onClick={resetExam}>Retry Exam</button>
+          <button onClick={resetExam}>Reset Exam</button>
         </div>
       )}        
     </>

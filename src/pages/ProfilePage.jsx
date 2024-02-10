@@ -6,8 +6,8 @@ function ProfilePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const token =  localStorage.getItem('token')
   const navigate = useNavigate()
-  // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
-  const URL_PREFIX = "http://localhost:3001"
+  const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+  // const URL_PREFIX = "http://localhost:3001"
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token');

@@ -15,7 +15,8 @@ function HomePage() {
   const [githubpassword, setGithubPassword] = useState('');
   const [githubemail, setGithubEmail] = useState('');
   const [loggedin, setIsLoggedIn] = useState(false)
-  const URL_PREFIX = 'http://localhost:3001'
+  // const URL_PREFIX = 'http://localhost:3001'
+  const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
 
   useEffect(()=>{
     const savedToken = localStorage.getItem("token");
@@ -177,9 +178,9 @@ function HomePage() {
     <>
       <div className='loginPage'>
         <div className="loginDivCont">
-          <img src="src\assets\Logo.png" alt="Logo" className='logoImage'/>
+          <img src="src\assets\birlabb.jpg" alt="Logo" className='logoImage'/>
           <h1>
-          Welcome to Brilla Mente!
+          Welcome!
           </h1>
           <div className='loginOptions'>
             <form className="formLogin" onSubmit={e=>handleFormSubmit(e, { userName, Password })}>

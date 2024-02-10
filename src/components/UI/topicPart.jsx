@@ -35,8 +35,8 @@ export default function TopictPart (){
 
   const { id } = useParams();
   const token = localStorage.getItem('token')
-  // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
-  const URL_PREFIX = "http://localhost:3001"
+  const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+  // const URL_PREFIX = "http://localhost:3001"
 
   useEffect(()=>{
     fetch(`${URL_PREFIX}/api/cards/find-by-topic/${id}`,{
@@ -83,6 +83,10 @@ export default function TopictPart (){
     API.createCard(token,cardObj).then(newCard=>{
       API.getCards(token).then(allCards=>{
         setCard(allCards)
+        setTtile('');
+        setContent('');
+        setDifficulty('');
+
       }).catch(err=>{
         console.log(err)
       })
@@ -94,22 +98,7 @@ export default function TopictPart (){
   const shareCard = id => {
     setShowSharePopup(!showSharePopup);
   }
-  //     const handleUsernameChange = async (e) => {
-  //       e.preventDefault();
-  //       const input = e.target.value;
-  //       try {
-  //           const response = await fetch(`${URL_PREFIX}/api/students`);
-  //           const usernames = await response.json();
-  //           const matchingUser = usernames.find(user => user.username === input);
-  //           if (matchingUser) {
-  //             setStudentName(matchingUser)
-  //         } else {
-  //             setStudentName('');
-  //         }
-  //     } catch (error) {
-  //         console.log(error);
-  //     }
-  // };  
+
   const handleUsernameSelect = async (event) => {
     event.preventDefault();    
     try {

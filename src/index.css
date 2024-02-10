@@ -229,7 +229,7 @@ button {
   padding: 8px;
   margin-left: 60px;
   margin-bottom: 10px;
-  border: lightgoldenrodyellow;
+  border: 1px solid blue;
 }
 .examSubmitBtn {
   margin-left: 15px;
