@@ -1,5 +1,6 @@
 .logoImage{
-    border-radius: 50%;
+    width: 450px;
+    height: 250px;
 }
 
 .teacherLog{
@@ -28,7 +29,7 @@ input{
 .loginOptions{
     display: flex;
     flex-wrap: wrap;
-    border: 2px solid orange;
+    border: 2px solid pink;
     padding: 20px;
     border-radius: 20px;
 }

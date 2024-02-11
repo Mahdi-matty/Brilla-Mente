@@ -7,8 +7,8 @@ export default function cardPart(){
   const [card, setCard] = useState('')
 
   const token = localStorage.getItem('token')
-  // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
-  const URL_PREFIX = "http://localhost:3001"
+  const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+  // const URL_PREFIX = "http://localhost:3001"
 
   const { id } = useParams();
   console.log(id)
@@ -28,7 +28,7 @@ export default function cardPart(){
       <SideNav />
       <div className="cardPartDev">
       <h2 style={{ fontSize: '24px', padding: '5px' }}>{card.title}</h2>
-        {card.content}
+        <p>{card.content}</p>
       </div>
     </>
   )

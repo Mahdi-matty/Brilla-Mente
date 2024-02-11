@@ -13,3 +13,20 @@
 .share-popup > * {
   margin-bottom: 10px;
 }
+.videoContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.videoItem {
+  flex: 0 0 48%; 
+  margin-bottom: 20px; 
+}
+
+@media (max-width: 768px) {
+  .videoItem {
+    flex: 0 0 100%;
+  }
+}

@@ -6,8 +6,8 @@ function SideNav(){
         const [isLoggedIn, setIsLoggedIn] = useState(false);
         const token =  localStorage.getItem('token')
         const navigate = useNavigate()
-        // const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
-        const URL_PREFIX = "http://localhost:3001"
+        const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
+        // const URL_PREFIX = "http://localhost:3001"
         const [pendingcards, setPendingCards] = useState([])
         const [topic, setTopic] = useState([])
         const [showAcceptPopup, setShowAcceptPopup] = useState(false);
@@ -117,10 +117,11 @@ function SideNav(){
                           <li key={card.id} className='pendingCards'>
                             <p>{card.title}</p>
                             <input
+                            className='inputTopicSideNav'
                             name='topicId'
                             onChange={(e)=>setTopicId(e.target.value)}
                             placeholder='topicId'></input>
-                            <button onClick={(e)=>acceptCard(e, card.id)}>Accespt</button>
+                            <button className='sideNavBtnAccept' onClick={(e)=>acceptCard(e, card.id)}>Accept</button>
                           </li>
                         ))}
                       </ul>
