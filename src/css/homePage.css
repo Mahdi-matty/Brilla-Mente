@@ -29,8 +29,8 @@ input{
     display: flex;
     flex-wrap: wrap;
     border: 2px solid orange;
-    padding: 20px;
     border-radius: 20px;
+    padding: 20px;
 }
 
 .gitHubOption{
