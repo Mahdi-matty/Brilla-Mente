@@ -2,6 +2,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import API from '../../utils/API'
 import SideNav from "../sidenav";
+import "../../css/subjectTopicPages.css"
 
 function SubjectPage(props){
   const [subjects, setSubjects] = useState([]);
@@ -80,15 +81,15 @@ function SubjectPage(props){
   return (
     <>
     <SideNav />
-     <div>
-      <h2>Subjects</h2>
+     <div className='mainPage'>
+      <h1>Subjects</h1>
       {loading ? (
         <p>Loading...</p>
       ) : subjects.length > 0 ? (
-        <ul>
+        <ul className='itemList'>
           {subjects.map((subject) => (
-            <li key={subject.id}>
-              <Link to={`/subjects/${subject.id}`}>{subject.title}</Link>
+            <li key={subject.id} className='itemLi'>
+              <Link to={`/subjects/${subject.id}`} className='itemLink'><h2>{subject.title}</h2></Link>
               <button onClick={() => delSubject(subject.id)}>Delete</button>
               <button onClick={() => editeSubject(subject.id)}>Edit</button>
             </li>
@@ -97,7 +98,8 @@ function SubjectPage(props){
       ) : (
         <p>No subjects available.</p>
       )}  
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className='addItem'>
+        <h2>Add a Subject:</h2>
         <input
         name='title'
         placeholder='title'

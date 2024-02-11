@@ -2,8 +2,8 @@
   font-family: 'Roboto Slab', serif;
   line-height: 1.5;
   font-weight: 400;
-  color: black;
-  background-color: #ffe6e600;
+  color: rgba(3, 3, 3, 0.87);
+  background-color: white;
 }
 
 #root {
@@ -13,12 +13,12 @@
 
 a {
   font-weight: 500;
-  color: blue;
+  color: #646cff;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: blueviolet;
+  color:  #535bf2;
 }
 
 body {
@@ -50,7 +50,7 @@ body {
   height: auto;
   top: 0px;
   text-align: right;
-  background: linear-gradient(to right, rgba(255, 192, 203, 0) 0%, rgba(255, 192, 203, 1) 100%);
+  background: linear-gradient(to right, rgba(255, 192, 203, 0) 0%,  #ffb374 100%);
   padding: 5px;
   align-items: center;
   margin-bottom: 20px;
@@ -86,7 +86,7 @@ input {
   top: 0;
   height: 100%;
   width: 130px;
-  background: linear-gradient(to bottom, rgba(255, 192, 203, 1) 0%, rgba(255, 192, 203, 1) 110%);
+  background: linear-gradient(to bottom, rgb(255, 206, 137) 0%, rgb(252, 236, 214) 110%);
   padding: 20px;
   transition: left 0.3s; 
   display: flex; /* Add this line to make it a flex container */
@@ -124,7 +124,7 @@ input {
   border-radius: 5px;
 }
 .sideNavBtnAccept {
-  background-color: salmon;
+  background-color: orange;
 }
 
 .iconSize {
@@ -164,13 +164,14 @@ button {
   font-size: 1em;
   font-weight: bolder;
   font-family: inherit;
-  background-color: lightcoral;
+  background-color: orange;
   cursor: pointer;
   transition: border-color 0.25s;
   margin: 10px;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: rgb(162, 105, 0);  
+  color: white;
 }
 
 button:focus,
@@ -270,6 +271,7 @@ button {
   border: 1px dashed;
   border-color: red;
 }
+
 .cardPartDev {
   margin-top: 100px;
   margin-left: 15%;
@@ -279,9 +281,11 @@ button {
   height: 550px;
   width: 70vw;
 }
+
 .notificationBtnStart {
  background-color: rgba(128, 0, 128, 0.071);
 }
+
 .notBellIcon {
   color: lemonchiffon;
 }

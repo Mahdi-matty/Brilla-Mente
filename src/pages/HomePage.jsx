@@ -178,9 +178,9 @@ function HomePage() {
     <>
       <div className='loginPage'>
         <div className="loginDivCont">
-          <img src="src\assets\birlabb.jpg" alt="Logo" className='logoImage'/>
+          <img src="src\assets\Logo.png" alt="Logo" className='logoImage'/>
           <h1>
-          Welcome!
+           Welcome to Brilla-Mente!
           </h1>
           <div className='loginOptions'>
             <form className="formLogin" onSubmit={e=>handleFormSubmit(e, { userName, Password })}>

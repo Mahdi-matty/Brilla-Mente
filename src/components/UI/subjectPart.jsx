@@ -2,6 +2,7 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react"
 import SideNav from "../sidenav";
+import "../../css/subjectTopicPages.css"
 
 export default function SubjectPart (){
   const [topics, setTopic] = useState([])
@@ -65,18 +66,19 @@ export default function SubjectPart (){
   return (
     <>
     <SideNav />
-      <div>
-      <h2>Topics</h2>
-      <ul>
+      <div className="mainPage"> 
+      <h1>Topics</h1>
+      <ul className="itemList">
         {topics.map((topic)=>(
-          <li key={topic.id}>
-          <Link to={`/topic/${topic.id}`}>{topic.title}</Link>
-          <button onClick={() => editeTopic(topic.id)}>Edit</button>
-          <button onClick={() => delTopic(topic.id)}>Delete</button>
+          <li key={topic.id} className="itemLi">
+            <Link to={`/topic/${topic.id}`} className="itemLink"><h2>{topic.title}</h2></Link>
+            <button onClick={() => editeTopic(topic.id)}>Edit</button>
+            <button onClick={() => delTopic(topic.id)}>Delete</button>
           </li>
         ))}
       </ul>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className="addItem">
+        <h2>Add a Topic:</h2>
         <input
         name='title'
         placeholder='title'

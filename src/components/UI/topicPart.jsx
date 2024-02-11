@@ -155,7 +155,7 @@ export default function TopictPart (){
     <>
     <SideNav />
      <div className="topicPartCardsDev">
-        <h2>Cards</h2>
+        <h1>Cards</h1>
         <ul>
           {cards.map((card)=>(
             <li className={`cardInQuestion cardDifficulty${card.difficulty}`} key={card.id}>
