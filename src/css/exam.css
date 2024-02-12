@@ -1,0 +1,67 @@
+.examDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.examDiv select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid blue;
+    border-radius: 8px;
+}
+
+select::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.selectExamSubject .selectExamDifficulty {
+    width: 25px;
+    left: 50px;
+    margin: 5px;
+}
+
+.examDivStart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bolder;
+}
+
+.examDivStart ul{
+    width: 80%;
+}
+
+.examItem{
+    font-weight: bolder;
+    margin: 15px;
+    padding: 15px;
+}
+
+.examQuestion{
+    text-decoration: underline;
+}
+
+.correctButton:hover{
+    background-color: green;
+}
+
+.incorrectButton:hover{
+    background-color: red;
+}
+
+.timer{
+    font-weight: bolder;
+}
+
+.correctAnswers{
+    background-color: rgb(135, 222, 135);
+    border-radius: 15px;
+}
+
+.incorrectAnswers{
+    background-color: rgb(222, 135, 135);
+    border-radius: 15px;
+}
