@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaFileAlt, FaBook, FaQuestionCircle, FaBell } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
+import "../css/navBar.css"
 
 function SideNav(){
         const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -74,7 +75,7 @@ function SideNav(){
                   <Link
                   to="/subjects"
                   onClick={() => navigate(`/subjects/${token}`)}
-                  className="badge bg-primary rounded-pill"
+                  className="sideNavLink"
                   >
                     <FaFileAlt className="iconSize"/> {/* Icon for Posts */}
                     <span className='navSpan'>Posts</span>
@@ -84,7 +85,7 @@ function SideNav(){
                   <Link
                   to="/assignments"
                   onClick={() => navigate('/assignments')}
-                  className="badge bg-primary rounded-pill"
+                  className="sideNavLink"
                   >
                     <FaBook className="iconSize"/> {/* Icon for Assignments */}
                     <span className='navSpan'>Assignments</span>
@@ -94,7 +95,7 @@ function SideNav(){
                   <Link
                   to="/quiz"
                   onClick={() => navigate('/quiz')}
-                  className="badge bg-primary rounded-pill"
+                  className="sideNavLink"
                   >
                     <FaQuestionCircle className="iconSize"/> {/* Icon for Assignments */}
                     <span className='navSpan'>Quiz</span>

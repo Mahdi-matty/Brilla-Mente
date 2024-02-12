@@ -21,7 +21,8 @@ import {
   WhatsappIcon,
 } from "react-share";
 import API from "../../utils/API";
-import SideNav from '../sidenav'
+import SideNav from '../sidenav';
+import "../../css/cardsPage.css"
 
 export default function TopictPart (){
   const [cards, setCard] = useState([])
@@ -154,9 +155,9 @@ export default function TopictPart (){
   return (
     <>
     <SideNav />
-     <div className="topicPartCardsDev">
-        <h2>Cards</h2>
-        <ul>
+      <h1>Cards</h1>
+      <div className="topicPartCardsDev">
+        <ul className="cardsUl">
           {cards.map((card)=>(
             <li className={`cardInQuestion cardDifficulty${card.difficulty}`} key={card.id}>
               <Link to={`cards/${card.id}`} >{card.title} </Link>
@@ -179,8 +180,6 @@ export default function TopictPart (){
                     type="text"
                     placeholder="username"
                     />
-                    <ul className="userSuggestion">
-                    </ul>
                     <button type="submit">find</button>
                   </form>
                   <button onClick={(e)=>shareWithUserName(e, card)}>share</button>      
@@ -190,27 +189,27 @@ export default function TopictPart (){
           ))}
         </ul>
       </div>
-      <div className="newSubjectAdd">
+      <div className="addNewCard">
         <form className="newFormSubject" onSubmit={handleFormSubmit}>
-          <label htmlFor="title">Title:</label>
+          <label htmlFor="title"><h2>Add a Card:</h2></label>
           <input
-          name="title"
-          id="title"
-          value={title}
-          onChange={e=>setTtile(e.target.value)}
-          placeholder="Enter your title"
-          type="text"
-          className="questionNewCard"
+            name="title"
+            id="title"
+            value={title}
+            onChange={e=>setTtile(e.target.value)}
+            placeholder="Type a Question"
+            type="text"
+            className="questionNewCard"
           />
 
           <label htmlFor="content">Content:</label>
           <textarea
-          name="content"
-          id="content"
-          value={content}
-          onChange={e=> setContent(e.target.value)}
-          placeholder="Enter your content"
-          className="answerNewCard"
+            name="content"
+            id="content"
+            value={content}
+            onChange={e=> setContent(e.target.value)}
+            placeholder="Enter your content"
+            className="answerNewCard"
           />
           <select value={difficulty} onChange={e=>setDifficulty(e.target.value)} multiple>
             <option value="1">Easy</option>

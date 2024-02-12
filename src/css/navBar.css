@@ -1,0 +1,11 @@
+.sideNavLink{
+    color: orange;
+}
+
+.sideNavLink:hover {
+    color: rgb(204, 145, 44);
+}
+
+.navSpan{
+    color: black;
+}
