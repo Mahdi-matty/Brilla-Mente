@@ -3,10 +3,14 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react"
 import SideNav from "../sidenav";
 import "../../css/subjectTopicPages.css"
+import API from '../../utils/API'
 
 export default function SubjectPart (){
   const [topics, setTopic] = useState([])
   const [newtopic, setNewTopic] = useState('');
+  const [edittitle, setEditTitle] = useState('')
+  const [showEditTopc, setShowEditTopic] = useState(false)
+  const [editTopicId, setEditTopicId]= useState(null)
   const token = localStorage.getItem('token')
   const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
   // const URL_PREFIX = "http://localhost:3001"
@@ -29,8 +33,13 @@ export default function SubjectPart (){
         title: newtopic
     };
     API.createTopic(token,topicObj).then(newTopic=>{
-      API.getTopics(token).then(allTopics=>{
-        setTopic(allTopics)
+      fetch(`${URL_PREFIX}/api/subjects/find-topics/${id}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }).then(res=>res.json()).then(data=>{
+        console.log('data', data)
+        setTopic(data)
       }).catch(err=>{
         console.log(err)
       })
@@ -38,11 +47,26 @@ export default function SubjectPart (){
       console.log(err)
     })
   }
-
-  const editeTopic = (id,obj)=>{
-    API.editTopic(token,id,obj).then((data)=>{
-      API.gettopics(token).then(allTopics=>{
-        setTopic(allTopics)
+ const editeTopic = (topic)=>{
+ setShowEditTopic(!showEditTopc)
+ setEditTitle(topic.title)
+ setEditTopicId(topic.id)
+ }
+  const handleEdit = (e)=>{
+    e.preventDefault()
+    const editedTopic ={
+      title: edittitle
+    }
+    API.editTopic(token,editTopicId,editedTopic).then((data)=>{
+      fetch(`${URL_PREFIX}/api/subjects/find-topics/${id}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }).then(res=>res.json()).then(data=>{
+        console.log('data', data)
+        setTopic(data)
+        setShowEditTopic(!showEditTopc)
+        setEditTopicId(null)
       }).catch(err=>{
         console.log(err)
       })
@@ -72,7 +96,23 @@ export default function SubjectPart (){
         {topics.map((topic)=>(
           <li key={topic.id} className="itemLi">
             <Link to={`/topic/${topic.id}`} className="itemLink"><h2>{topic.title}</h2></Link>
-            <button onClick={() => editeTopic(topic.id)}>Edit</button>
+            <button onClick={() => editeTopic(topic)}>Edit</button>
+            <div className="editedTopic">
+              {editTopicId === topic.id && (
+                <form onSubmit={handleEdit}>
+                  <input
+                  name="editTitle"
+                  id="editTitle"
+                  value={edittitle}
+                  onChange={e => setEditTitle(e.target.value)}
+                  placeholder="Edit Question"
+                  type="text"
+                  className="questionEditTopic" />
+                  <button type="submit" >Save Changes</button>
+                </form>
+              )}
+
+            </div>
             <button onClick={() => delTopic(topic.id)}>Delete</button>
           </li>
         ))}

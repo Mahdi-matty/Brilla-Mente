@@ -33,7 +33,12 @@ export default function TopictPart (){
   const [studentId, setStudentId] = useState('')
   const [studentname, setStudentName] = useState('')
   const [suggestions, setSuggestions] = useState([])
-
+  const [showeditFormCard, setShowEditFormCard] = useState(false)
+  const [edittitle, setEditTitle] = useState('')
+  const [editcontent, setEditContent] = useState('')
+  const [editdifficulty, setEditDifficulty]= useState('')
+  const [editCard, setEditingCard] = useState('')
+  const [editCardId, setEditingCardId] = useState(null)
   const { id } = useParams();
   const token = localStorage.getItem('token')
   const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
@@ -50,22 +55,54 @@ export default function TopictPart (){
     })
   },[])
 
-  const editeCard = (id,obj)=>{
-    API.editCard(token,id,obj).then((data)=>{
-      API.getCards(token).then(allCards=>{
-        setCard(allCards)
-      }).catch(err=>{
-        console.log(err)
+  const handleEdit = (card) => {
+    setEditingCard(card);
+    setEditingCardId(card.id)
+    setEditTitle(card.title);
+    setEditContent(card.content);
+    setEditDifficulty(card.difficulty);
+  };
+
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    const editedCard = {
+      title: edittitle,
+      content: editcontent,
+      difficulty: editdifficulty,
+    };
+
+    API.editCard(token, editCardId, editedCard)
+      .then(() => {
+        // Reload cards after editing
+        fetch(`${URL_PREFIX}/api/cards/find-by-topic/${id}`,{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        }).then(res=>res.json()).then(data=>{
+          console.log('data', data)
+          setCard(data)
+            setEditingCardId(null)
+          })
+          .catch(err => console.error(err));
+
+        // Clear editing state
+        setEditingCard(null);
+        setEditTitle('');
+        setEditContent('');
+        setEditDifficulty('');
       })
-    }).catch(err=>{
-      console.log(err)
-    })
-  }
+      .catch(err => console.error(err));
+  };
 
   const delCard = id=>{
     API.deleteCard(token,id).then((data)=>{
-      API.getCards(token).then(allCards=>{
-        setCard(allCards)
+      fetch(`${URL_PREFIX}/api/cards/find-by-topic/${id}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }).then(res=>res.json()).then(data=>{
+        console.log('data', data)
+        setCard(data)
       }).catch(err=>{
         console.log(err)
       })
@@ -82,8 +119,13 @@ export default function TopictPart (){
         difficulty: difficulty,
     }
     API.createCard(token,cardObj).then(newCard=>{
-      API.getCards(token).then(allCards=>{
-        setCard(allCards)
+      fetch(`${URL_PREFIX}/api/cards/find-by-topic/${id}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }).then(res=>res.json()).then(data=>{
+        console.log('data', data)
+        setCard(data)
         setTtile('');
         setContent('');
         setDifficulty('');
@@ -162,7 +204,39 @@ export default function TopictPart (){
             <li className={`cardInQuestion cardDifficulty${card.difficulty}`} key={card.id}>
               <Link to={`cards/${card.id}`} >{card.title} </Link>
               <p>{card.content}</p>
-              <button onClick={() => editeCard(card.id)}>Edit</button>
+              <button onClick={() => handleEdit(card)}>Edit</button>
+             <div className="editNewCard">
+              {editCardId === card.id && ( 
+          <form className="editFormSubject" onSubmit={handleEditSubmit}>
+            <label htmlFor="editTitle"><h2>Edit Card:</h2></label>
+            <input
+              name="editTitle"
+              id="editTitle"
+              value={edittitle}
+              onChange={e => setEditTitle(e.target.value)}
+              placeholder="Edit Question"
+              type="text"
+              className="questionEditCard"
+            />
+
+            <label htmlFor="editContent"><h3>Edit Content:</h3></label>
+            <textarea
+              name="editContent"
+              id="editContent"
+              value={editcontent}
+              onChange={e => setEditContent(e.target.value)}
+              placeholder="Edit your content"
+              className="answerEditCard"
+            />
+            <select value={editdifficulty} onChange={e => setEditDifficulty(e.target.value)} className="selectBox">
+              <option value="1">Easy</option>
+              <option value="2">medium</option>
+              <option value="3">Hard</option>
+            </select>
+            <button type="submit">Save Changes</button>
+          </form>
+        )}
+      </div>
               <button onClick={() => delCard(card.id)}>Delete</button>
               <button className="cardShareIt" onClick={()=>shareCard(card.id)}>Share</button>
               {showSharePopup && (

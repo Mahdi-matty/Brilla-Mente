@@ -8,6 +8,8 @@ function SubjectPage(props){
   const [subjects, setSubjects] = useState([]);
   const [newsubject, setNewSubject] = useState('')
   const [loading, setLoading] = useState(true);
+  const [edittitle, setEditTitle] = useState('')
+  const [editSubjectId, setEditSubjectId]= useState(null)
   const  token  = localStorage.getItem('token')
   const URL_PREFIX="https://brilla-back-fb4c71e750bd.herokuapp.com"
   // const URL_PREFIX = "http://localhost:3001"
@@ -43,8 +45,13 @@ function SubjectPage(props){
       title: newsubject,
     }
     API.createSubject(token,subjectObj).then(newsubject=>{
-      API.getSubject(token).then(allSubjects=>{
-        setSubjects(allSubjects)
+      fetch(`${URL_PREFIX}/api/subjects/student-subjects`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }).then(res=>res.json()).then(data=>{
+        console.log('data', data)
+        setSubjects(data)
       }).catch(err=>{
         console.log(err)
       })
@@ -52,19 +59,31 @@ function SubjectPage(props){
       console.log(err)
     })
   }
-
-  const editeSubject = (id,obj)=>{
-    API.editSubject(token,id,obj).then((data)=>{
-      API.getSubject(token).then(allSubjects=>{
-        setSubjects(allSubjects)
+  const editeSubject = (subject)=>{
+    setEditTitle(subject.title)
+    setEditSubjectId(subject.id)
+    }
+    const handleEdit = (e)=>{
+      e.preventDefault()
+      const editedSubject ={
+        title: edittitle
+      }
+      API.editSubject(token,editSubjectId,editedSubject).then((data)=>{
+        fetch(`${URL_PREFIX}/api/subjects/student-subjects`,{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        }).then(res=>res.json()).then(data=>{
+          console.log('data', data)
+          setSubjects(data)
+          setEditSubjectId(null)
+        }).catch(err=>{
+          console.log(err)
+        })
       }).catch(err=>{
         console.log(err)
       })
-    }).catch(err=>{
-      console.log(err)
-    })
-  
-  }
+    }
 
   const delSubject = id=>{
     API.deleteSubject(token,id).then((data)=>{
@@ -91,7 +110,23 @@ function SubjectPage(props){
             <li key={subject.id} className='itemLi'>
               <Link to={`/subjects/${subject.id}`} className='itemLink'><h2>{subject.title}</h2></Link>
               <button onClick={() => delSubject(subject.id)}>Delete</button>
-              <button onClick={() => editeSubject(subject.id)}>Edit</button>
+              <button onClick={() => editeSubject(subject)}>Edit</button>
+              <div className="editedSubject">
+              {editSubjectId === subject.id && (
+                <form onSubmit={handleEdit}>
+                  <input
+                  name="editTitle"
+                  id="editTitle"
+                  value={edittitle}
+                  onChange={e => setEditTitle(e.target.value)}
+                  placeholder="Edit Question"
+                  type="text"
+                  className="questionEditSubject" />
+                  <button type="submit" >Save Changes</button>
+                </form>
+              )}
+
+            </div>
             </li>
           ))}
         </ul>
