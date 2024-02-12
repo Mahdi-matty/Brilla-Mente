@@ -59,5 +59,9 @@
 }
 
 @media (max-width: 767px) {
-   
+   .itemLi{
+        width: 80%;
+        margin-right: 5%;
+        margin-left: 5%;
+   }
 }

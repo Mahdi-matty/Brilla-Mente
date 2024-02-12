@@ -199,37 +199,6 @@ button {
   cursor: pointer;
 }
 
-.examDiv {
-  margin-top: 50px;
-  padding-left: 20%;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  width: 80vh;
-}
-.examDiv p {
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.examDiv select {
-  width: 100%;
-  padding: 8px;
-  margin-left: 60px;
-  margin-bottom: 10px;
-  border: 1px solid blue;
-}
-.examSubmitBtn {
-  margin-left: 15px;
-  margin-top: 10px;
-}
-
-.selectExamSubject .selectExamDifficulty {
-  width: 25px;
-  left: 50px;
-  margin: 5px;
-}
-
 .pendingCards {
  color: black;
 }

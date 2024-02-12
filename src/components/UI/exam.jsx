@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import SideNav from '../sidenav'
+import "../../css/exam.css"
 export default function Exam (){
   const [questionIndex, setQuestionIndex] = useState(-1);
   const [timer, setTimer] = useState(10);
@@ -82,9 +83,9 @@ export default function Exam (){
   
   useEffect(() => {
     if (timer === 0) {
-        setIsAnswered(true);
-        setTimer(10);
-      }
+      setIsAnswered(true);
+      setTimer(10);
+    }
   }, [timer]);
 
   const addCorrect = (NewCard)=>{
@@ -116,19 +117,18 @@ export default function Exam (){
     <SideNav />
     {!showexamDivStart && !showResault && (
       <div className="examDiv">
-        <p>Select Topic:</p>
+        <h2>Select Topic:</h2>
         <form onSubmit={showExamDiv}> 
           <select className="selectExamTopic" onChange={(e) => setSelectedTopic(e.target.value)}>
-          <option value="">Select Topic</option>
-          {topics.map((topic) => (
-            <option key={topic.id} value={topic.id}>
-              {topic.title}
-            </option>
-          ))}
+            <option value="">Select Topic</option>
+            {topics.map((topic) => (
+              <option key={topic.id} value={topic.id}>
+                {topic.title}
+              </option>
+            ))}
           </select>
-          <p>Select Difficulty:</p>
+          <h2>Select Difficulty:</h2>
           <select className="selectExamDifficulty" onChange={(e) => setDifficulty(e.target.value)} multiple={true}>
-            <option value="">Select Difficulty</option>
             <option value="1">easy</option>
             <option value="2">medium</option>
             <option value="3">hard</option>
@@ -141,38 +141,40 @@ export default function Exam (){
         <div className="examDivStart">
           <ul>
             {cards.map((card, index) => (
-              <li key={card.id}>
-                <p>{questionIndex === index ? card.title : ''}</p>
+              <li key={card.id} className="examItem">
+                <h3 className="examQuestion">{questionIndex === index ? card.title : ''}</h3>
                 {isAnswered && questionIndex === index && (
                   <div>
                     <p>{card.content}</p>
-                    <button onClick={() => addCorrect(card)}>Correct</button>
-                    <button onClick={() => addInCorrect(card)}>Incorrect</button>
+                    <button onClick={() => addCorrect(card)} className="correctButton">Correct</button>
+                    <button onClick={() => addInCorrect(card)} className="incorrectButton">Incorrect</button>
                   </div>
                 )}                  
               </li>
             ))}
             <button onClick={nextQuestion}>Next</button>
           </ul>
-          <p>Time left: {timer} seconds</p>
+          <p className="timer">Time left: {timer} seconds</p>
           <button onClick={finishExam}> Finish</button>
         </div>
       )}
       {showResault && (
-        <div>
-          <ul> Correct :
+        <div className="examDivStart">
+          <ul> 
+            <h2>Correct:</h2>
             {correctCard.map((card)=>(
-              <li key={card.id}>
-                <p>{card.title}</p>
+              <li key={card.id} className="examItem correctAnswers">
+                <h3 className="examQuestion">{card.title}</h3>
                 <p>{card.content}</p>
               </li>
             ))
             }
           </ul>
-          <ul> Incorrect :
+          <ul> 
+            <h2>Incorrect:</h2>
             {inCorrectCard.map((card)=> (
-              <li key={card.id}>
-                <p>{card.title}</p>
+              <li key={card.id} className="examItem incorrectAnswers">
+                <h3 className="examQuestion">{card.title}</h3>
                 <p>{card.content}</p>
               </li>
             ))}
