@@ -45,7 +45,7 @@ function HomePage() {
 
     if (codeParams && (localStorage.getItem('AccessToken') === null)){
       async function getAccessToken(){
-        await fetch(`${URL_PREFIX}/getAccessToken?code=1`+ codeParams, {
+        await fetch(`${URL_PREFIX}/getAccessToken?code=`+ codeParams, {
           method: 'GET'
         }).then((Response)=>{
           return Response.json()
