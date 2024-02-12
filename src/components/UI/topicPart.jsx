@@ -241,7 +241,7 @@ export default function TopictPart (){
               <button className="cardShareIt" onClick={()=>shareCard(card.id)}>Share</button>
               {showSharePopup && (
                 <div className="share-popup">
-                  <TelegramShareButton url={`http://localhost:3000/topic/${id}/cards/${card.id}`}>
+                  <TelegramShareButton url={`${URL_PREFIX}/topic/${id}/cards/${card.id}`}>
                   <TelegramIcon size={32} round />
                   </TelegramShareButton>
                   <EmailShareButton url={card.id}>
