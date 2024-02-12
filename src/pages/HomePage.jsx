@@ -4,6 +4,7 @@ import API from '../utils/API'
 import Signup from '../components/UI/signup';
 import { FaGithub } from 'react-icons/fa';
 import '../css/homePage.css';
+import Logo from '../assets/Logo.png'
 
 function HomePage() {
   const navigate = useNavigate();
@@ -178,7 +179,7 @@ function HomePage() {
     <>
       <div className='loginPage'>
         <div className="loginDivCont">
-          <img src="src\assets\Logo.png" alt="Logo" className='logoImage'/>
+          <img src={Logo} alt="Logo" className='logoImage'/>
           <h1>
            Welcome to Brilla-Mente!
           </h1>
@@ -205,7 +206,7 @@ function HomePage() {
             <div className='gitHubOption'>
               <h2>Or login with Github</h2>
               <button onClick={loginWithgithub}>Get User Data</button>
-              <img src='src\assets\github.png' onClick={getUserData} className='gitHubLogo'/>
+              <FaGithub onClick={getUserData} className='gitHubLogo'/>
             </div>            
           </div>
           <button onClick={toggleSignup} className="signUpButton">
